@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KICKS - Login & Register</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">KICKS</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">New Drops 🔥</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Men</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Women</a>
+                    </li>
+                </ul>
+                <div class="d-flex gap-3 align-items-center">
+                    <a href="#" class="text-dark"><i class="fas fa-search"></i></a>
+                    <a href="#" class="text-dark"><i class="fas fa-user"></i></a>
+                    <div class="cart-badge">0</div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Toggle -->
+    <div class="auth-container">
+        <div class="page-toggle">
+            <button onclick="showLogin()" id="loginToggle" class="active">Login</button>
+            <button onclick="showRegister()" id="registerToggle">Register</button>
+        </div>
+
+        <!-- LOGIN SECTION -->
+        <div id="loginSection" class="auth-section active">
+            <div class="row-container">
+                <!-- Login Form -->
+                <div class="form-card">
+                    <h2 class="form-title">Login</h2>
+                    <a href="#" class="forgot-password">Forgot your password?</a>
+
+                    <form>
+                        <input type="email" class="form-control" placeholder="Email">
+                        <input type="password" class="form-control" placeholder="Password">
+
+                        <div class="form-check">
+                            <input type="checkbox" id="keepLogged">
+                            <label for="keepLogged">
+                                Keep me logged in - applies to all log in options below. <a href="#">More info</a>
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn-primary-custom">
+                            <span>EMAIL LOGIN</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </form>
+
+                    <div class="social-login mt-4">
+                        <div class="social-btn">
+                            <i class="fab fa-google fa-google"></i>
+                        </div>
+                        <div class="social-btn">
+                            <i class="fab fa-apple fa-apple"></i>
+                        </div>
+                        <div class="social-btn">
+                            <i class="fab fa-facebook fa-facebook"></i>
+                        </div>
+                    </div>
+
+                    <p style="font-size: 0.85rem; color: #666; margin-top: 1.5rem;">
+                        By clicking 'Log In' you agree to our website KicksClub Terms & Conditions, Kicks Privacy Notice and Terms & Conditions.
+                    </p>
+                </div>
+
+                <!-- Info Card -->
+                <div class="info-card">
+                    <h3 class="info-title">Join Kicks Club Get Rewarded Today.</h3>
+                    <p class="info-text">
+                        As kicks club member you get rewarded with what you love for doing what you love. 
+                        Sign up today and receive immediate access to these Level 1 benefits:
+                    </p>
+
+                    <ul class="benefits-list">
+                        <li>Free shipping</li>
+                        <li>A 15% off voucher for your next purchase</li>
+                        <li>Access to Members Only products and sales</li>
+                        <li>Access to adidas Running and Training apps</li>
+                        <li>Special offers and promotions</li>
+                    </ul>
+
+                    <p class="info-text">
+                        Join now to start earning points, reach new levels and unlock more rewards and 
+                        benefits from adiClub.
+                    </p>
+
+                    <button class="btn-primary-custom">
+                        <span>JOIN THE CLUB</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- REGISTER SECTION -->
+        <div id="registerSection" class="auth-section">
+            <div class="row-container">
+                <!-- Register Form -->
+                <div class="form-card">
+                    <h2 class="form-title">Register</h2>
+                    <p class="form-subtitle">Sign up with</p>
+
+                    <div class="social-login">
+                        <div class="social-btn">
+                            <i class="fab fa-google fa-google"></i>
+                        </div>
+                        <div class="social-btn">
+                            <i class="fab fa-apple fa-apple"></i>
+                        </div>
+                        <div class="social-btn">
+                            <i class="fab fa-facebook fa-facebook"></i>
+                        </div>
+                    </div>
+
+                    <div class="divider">OR</div>
+
+                    <form>
+                        <label class="form-label">Your Name</label>
+                        <input type="text" class="form-control" placeholder="First Name">
+                        <input type="text" class="form-control" placeholder="Last Name">
+
+                        <label class="form-label">Gender</label>
+                        <div class="gender-group">
+                            <div class="gender-option">
+                                <input type="checkbox" id="male">
+                                <label for="male">Male</label>
+                            </div>
+                            <div class="gender-option">
+                                <input type="checkbox" id="female">
+                                <label for="female">Female</label>
+                            </div>
+                            <div class="gender-option">
+                                <input type="checkbox" id="other">
+                                <label for="other">Other</label>
+                            </div>
+                        </div>
+
+                        <label class="form-label">Login Details</label>
+                        <input type="email" class="form-control" placeholder="Email">
+                        <input type="password" class="form-control" placeholder="Password">
+                        <p class="password-hint">
+                            Minimum 8 characters with at least one uppercase, one lowercase, one special 
+                            character and a number
+                        </p>
+
+                        <div class="form-check">
+                            <input type="checkbox" id="agreeTerms">
+                            <label for="agreeTerms">
+                                By clicking 'Log In' you agree to our website KicksClub Terms & Conditions, 
+                                Kicks Privacy Notice and Terms & Conditions.
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input type="checkbox" id="keepLoggedRegister">
+                            <label for="keepLoggedRegister">
+                                Keep me logged in - applies to all log in options below. <a href="#">More info</a>
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn-primary-custom">
+                            <span>REGISTER</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Info Card -->
+                <div class="info-card">
+                    <h3 class="info-title">Join Kicks Club Get Rewarded Today.</h3>
+                    <p class="info-text">
+                        As kicks club member you get rewarded with what you love for doing what you love. 
+                        Sign up today and receive immediate access to these Level 1 benefits:
+                    </p>
+
+                    <ul class="benefits-list">
+                        <li>Free shipping</li>
+                        <li>A 15% off voucher for your next purchase</li>
+                        <li>Access to Members Only products and sales</li>
+                        <li>Access to adidas Running and Training apps</li>
+                        <li>Special offers and promotions</li>
+                    </ul>
+
+                    <p class="info-text">
+                        Join now to start earning points, reach new levels and unlock more rewards and 
+                        benefits from adiClub.
+                    </p>
+
+                    <button class="btn-primary-custom">
+                        <span>JOIN THE CLUB</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Newsletter -->
+    <div class="container">
+        <div class="newsletter">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h2>JOIN OUR KICKSPLUS<br>CLUB & GET 15% OFF</h2>
+                    <p>Sign up for free! Join the community.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Email address">
+                        <button type="submit">SUBMIT</button>
+                    </form>
+                </div>
+                <div class="col-md-6 text-end">
+                    <div class="kicks-logo-white">KICKS</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <h5 class="footer-title">About us</h5>
+                    <p class="footer-text">
+                        We are the biggest hyperstore in the universe. We got you all covered with our 
+                        exclusive collections and latest drops.
+                    </p>
+                </div>
+                <div class="col-md-3">
+                    <h5 class="footer-title">Categories</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Runners</a></li>
+                        <li><a href="#">Sneakers</a></li>
+                        <li><a href="#">Basketball</a></li>
+                        <li><a href="#">Outdoor</a></li>
+                        <li><a href="#">Golf</a></li>
+                        <li><a href="#">Hiking</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5 class="footer-title">Company</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Blogs</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5 class="footer-title">Follow us</h5>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-logo">KICKS</div>
+
+            <div class="copyright">
+                © All rights reserved | Made With <i class="fas fa-heart" style="color: #4169e1;"></i> by 
+                <a href="#">Vishista Systems International</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function showLogin() {
+            document.getElementById('loginSection').classList.add('active');
+            document.getElementById('registerSection').classList.remove('active');
+            document.getElementById('loginToggle').classList.add('active');
+            document.getElementById('registerToggle').classList.remove('active');
+        }
+
+        function showRegister() {
+            document.getElementById('registerSection').classList.add('active');
+            document.getElementById('loginSection').classList.remove('active');
+            document.getElementById('registerToggle').classList.add('active');
+            document.getElementById('loginToggle').classList.remove('active');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,530 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #e8e8e8;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #fff;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.navbar-brand {
+    font-weight: 900;
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+    color: #000;
+}
+
+.nav-link {
+    color: #000;
+    font-weight: 600;
+    margin: 0 1rem;
+}
+
+.cart-badge {
+    background-color: #ffa500;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: #000;
+}
+
+/* Banner */
+.promo-banner {
+    background-color: #f5f5f5;
+    padding: 2rem;
+    margin: 2rem 0;
+}
+
+.promo-banner h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.promo-banner p {
+    color: #666;
+    margin-bottom: 0.5rem;
+}
+
+.promo-banner a {
+    color: #000;
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+/* Main Container */
+.cart-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem 3rem;
+}
+
+/* Cart Card */
+.cart-card {
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+.cart-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.cart-subtitle {
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+/* Cart Item */
+.cart-item {
+    display: flex;
+    gap: 2rem;
+    padding: 2rem 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.cart-item:last-child {
+    border-bottom: none;
+}
+
+.item-image {
+    width: 150px;
+    height: 150px;
+    background-color: #f8f8f8;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    flex-shrink: 0;
+}
+
+.item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.item-details {
+    flex: 1;
+}
+
+.item-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.item-subtitle {
+    color: #666;
+    font-size: 0.95rem;
+    margin-bottom: 0.25rem;
+}
+
+.item-price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #4169e1;
+    margin-top: 1rem;
+}
+
+/* Dropdowns */
+.item-controls {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.control-dropdown {
+    position: relative;
+}
+
+.dropdown-btn {
+    background-color: #fff;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    padding: 0.5rem 2.5rem 0.5rem 1rem;
+    font-size: 0.95rem;
+    cursor: pointer;
+    position: relative;
+}
+
+.dropdown-btn::after {
+    content: '\f078';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Item Actions */
+.item-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.action-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: #666;
+    transition: color 0.3s;
+}
+
+.action-btn:hover {
+    color: #000;
+}
+
+.action-btn.wishlist:hover {
+    color: #e74c3c;
+}
+
+/* Order Summary */
+.order-summary {
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 2.5rem;
+    position: sticky;
+    top: 2rem;
+}
+
+.summary-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 1rem;
+}
+
+.summary-row:last-of-type {
+    border-bottom: 2px solid #000;
+}
+
+.summary-total {
+    display: flex;
+    justify-content: space-between;
+    padding: 1.5rem 0 0;
+    font-weight: 700;
+    font-size: 1.25rem;
+}
+
+.btn-checkout {
+    background-color: #000;
+    color: #fff;
+    border: none;
+    padding: 1rem;
+    border-radius: 10px;
+    font-weight: 700;
+    width: 100%;
+    font-size: 1rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: 1.5rem;
+    transition: background-color 0.3s;
+}
+
+.btn-checkout:hover {
+    background-color: #333;
+}
+
+.promo-link {
+    text-align: center;
+    margin-top: 1rem;
+    text-decoration: underline;
+    color: #000;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* You May Also Like Section */
+.recommendations {
+    margin-top: 3rem;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.section-title {
+    font-size: 2rem;
+    font-weight: 900;
+}
+
+.carousel-controls {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.carousel-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background-color: #666;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+}
+
+.carousel-btn:hover {
+    background-color: #000;
+}
+
+/* Product Cards */
+.product-carousel {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.product-card {
+    background-color: #f5f5f5;
+    border-radius: 15px;
+    padding: 1.5rem;
+    position: relative;
+    transition: transform 0.3s;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+.badge-new {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background-color: #4169e1;
+    color: #fff;
+    padding: 0.35rem 1rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.product-image {
+    width: 100%;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.product-image img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.product-title {
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-bottom: 0.75rem;
+    min-height: 2.5rem;
+}
+
+.product-footer {
+    background-color: #000;
+    color: #fff;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.product-footer .price {
+    color: #ffa500;
+}
+
+/* Carousel Dots */
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 3rem;
+}
+
+.dot {
+    width: 40px;
+    height: 4px;
+    background-color: #ddd;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.dot.active {
+    background-color: #4169e1;
+}
+
+/* Newsletter */
+.newsletter {
+    background-color: #4169e1;
+    padding: 3rem 2rem;
+    border-radius: 20px;
+    margin: 3rem 0 2rem;
+    color: #fff;
+}
+
+.newsletter h2 {
+    font-size: 2rem;
+    font-weight: 900;
+    margin-bottom: 0.5rem;
+}
+
+.newsletter p {
+    margin-bottom: 1.5rem;
+}
+
+.newsletter-form {
+    display: flex;
+    gap: 1rem;
+    max-width: 500px;
+}
+
+.newsletter-form input {
+    flex: 1;
+    padding: 1rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+}
+
+.newsletter-form button {
+    background-color: #000;
+    color: #fff;
+    border: none;
+    padding: 1rem 2.5rem;
+    border-radius: 8px;
+    font-weight: 700;
+}
+
+.kicks-logo-white {
+    font-size: 5rem;
+    font-weight: 900;
+    letter-spacing: 5px;
+}
+
+/* Footer */
+footer {
+    background-color: #1a1a1a;
+    color: #fff;
+    padding: 3rem 2rem 2rem;
+}
+
+.footer-title {
+    color: #ffa500;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.footer-text {
+    color: #ccc;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: 0.75rem;
+}
+
+.footer-links a {
+    color: #ccc;
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    color: #ffa500;
+}
+
+.social-icons a {
+    color: #fff;
+    margin-right: 1.5rem;
+    font-size: 1.3rem;
+}
+
+.social-icons a:hover {
+    color: #ffa500;
+}
+
+.footer-logo {
+    font-size: 6rem;
+    font-weight: 900;
+    letter-spacing: 8px;
+    text-align: center;
+    margin: 3rem 0 2rem;
+    line-height: 1;
+}
+
+.copyright {
+    text-align: center;
+    color: #999;
+    font-size: 0.85rem;
+    padding-top: 2rem;
+    border-top: 1px solid #333;
+}
+
+.copyright a {
+    color: #4169e1;
+    text-decoration: none;
+}
+
+@media (max-width: 1200px) {
+    .product-carousel {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .product-carousel {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .cart-item {
+        flex-direction: column;
+    }
+
+    .order-summary {
+        position: relative;
+        top: 0;
+    }
+}

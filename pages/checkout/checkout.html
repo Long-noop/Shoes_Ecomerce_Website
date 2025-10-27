@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KICKS - Checkout</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">KICKS</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            New Drops 🔥
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            Men
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            Women
+                        </a>
+                    </li>
+                </ul>
+                <div class="d-flex gap-3 align-items-center">
+                    <a href="#" class="text-dark"><i class="fas fa-search"></i></a>
+                    <a href="#" class="text-dark"><i class="fas fa-user"></i></a>
+                    <div class="cart-badge">0</div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Checkout Container -->
+    <div class="checkout-container">
+        <div class="login-banner">
+            Login and Checkout faster
+        </div>
+
+        <div class="row">
+            <!-- Left Column - Forms -->
+            <div class="col-lg-7">
+                <!-- Contact Details -->
+                <div class="section-card">
+                    <h2 class="section-title">Contact Details</h2>
+                    <p class="section-subtitle">We will use these details to keep you inform about your delivery.</p>
+                    
+                    <div class="mb-3">
+                        <input type="email" class="form-control" placeholder="Email">
+                    </div>
+                </div>
+
+                <!-- Shipping Address -->
+                <div class="section-card">
+                    <h2 class="section-title">Shipping Address</h2>
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" placeholder="First Name*">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" placeholder="Last Name*">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <input type="text" class="form-control" placeholder="Find Delivery Address*">
+                        <div class="helper-text">Start typing your street address or zip code for suggestion</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <input type="tel" class="form-control" placeholder="Phone Number*">
+                        <div class="helper-text">E.g. (123) 456-7890</div>
+                    </div>
+                </div>
+
+                <!-- Delivery Options -->
+                <div class="section-card">
+                    <h2 class="section-title">Delivery Options</h2>
+                    
+                    <div class="delivery-option selected">
+                        <div>
+                            <h5 class="mb-1" style="font-weight: 600;">Standard Delivery</h5>
+                            <p class="mb-0 text-muted" style="font-size: 0.9rem;">Enter your address to see when you'll get your order</p>
+                        </div>
+                        <div class="delivery-price">$6.00</div>
+                    </div>
+
+                    <div class="delivery-option">
+                        <div>
+                            <h5 class="mb-1" style="font-weight: 600;">Collect in store</h5>
+                            <p class="mb-0 text-muted" style="font-size: 0.9rem;">Pay now, collect in store</p>
+                        </div>
+                        <span class="free-badge">Free</span>
+                    </div>
+                </div>
+
+                <!-- Additional Options -->
+                <div class="section-card">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="billingCheck" checked>
+                        <label class="form-check-label" for="billingCheck">
+                            My billing and delivery information are the same
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="ageCheck" checked>
+                        <label class="form-check-label" for="ageCheck">
+                            I'm 13+ year old
+                        </label>
+                    </div>
+
+                    <div class="mt-4 mb-3">
+                        <p style="font-weight: 600;">Also want product updates with our newsletter?</p>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="newsletterCheck" checked>
+                        <label class="form-check-label" for="newsletterCheck">
+                            Yes, I'd like to receive emails about exclusive sales and more.
+                        </label>
+                    </div>
+
+                    <button class="btn-review">REVIEW AND PAY</button>
+                </div>
+            </div>
+
+            <!-- Right Column - Order Summary -->
+            <div class="col-lg-5">
+                <div class="order-summary">
+                    <h3 class="summary-title">Order Summary</h3>
+                    
+                    <div class="summary-row">
+                        <span>1 ITEM</span>
+                        <span>$130.00</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Delivery</span>
+                        <span>$6.99</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Sales Tax</span>
+                        <span>-</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Total</span>
+                        <span>$130.00</span>
+                    </div>
+                </div>
+
+                <!-- Order Details -->
+                <div class="section-card mt-3">
+                    <h4 style="font-weight: 700; margin-bottom: 1.5rem;">Order Details</h4>
+                    
+                    <div class="product-card">
+                        <div class="product-info">
+                            <div class="product-image">
+                                <img src="https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=150" alt="Dropset Trainer Shoes">
+                            </div>
+                            <div class="product-details">
+                                <h5>DROPSET TRAINER SHOES</h5>
+                                <p>Men's Road Running Shoes</p>
+                                <p>Enamel Blue/ University White</p>
+                                <p>Size 10 &nbsp;&nbsp;&nbsp; Quantity 1</p>
+                                <div class="product-price">$130.00</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Newsletter Section -->
+        <div class="newsletter">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <h2>JOIN OUR KICKSPLUS<br>CLUB & GET 15% OFF</h2>
+                        <p>Sign up for free! Join the community.</p>
+                        <form class="newsletter-form">
+                            <input type="email" placeholder="Email address" required>
+                            <button type="submit">SUBMIT</button>
+                        </form>
+                    </div>
+                    <div class="col-md-6 text-end">
+                        <div class="kicks-logo-large">KICKS</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <h5 class="footer-title">About us</h5>
+                    <p>We are the biggest hyperstore in the universe. We got you all covered with our exclusive collections and latest drops.</p>
+                </div>
+                <div class="col-md-3">
+                    <h5 class="footer-title">Categories</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Runners</a></li>
+                        <li><a href="#">Sneakers</a></li>
+                        <li><a href="#">Basketball</a></li>
+                        <li><a href="#">Outdoor</a></li>
+                        <li><a href="#">Golf</a></li>
+                        <li><a href="#">Hiking</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5 class="footer-title">Company</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Blogs</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5 class="footer-title">Follow us</h5>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-logo">KICKS</div>
+            
+            <div class="copyright">
+                © All rights reserved | Made With <i class="fas fa-heart" style="color: #4169e1;"></i> by <a href="#">Vishista Systems International</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Toggle delivery options
+        document.querySelectorAll('.delivery-option').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.delivery-option').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+                this.classList.add('selected');
+            });
+        });
+    </script>
+</body>
+</html>
