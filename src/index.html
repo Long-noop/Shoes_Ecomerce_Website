@@ -34,12 +34,22 @@
                             Women
                         </a>
                     </li>
+                    <li><a class="nav-link" href="./pages/about/about.html">About</a></li>
+                    <li><a class="nav-link" href="./pages/contact/contact.html">Contact</a></li>
+                    <li><a class="nav-link" href="./pages/blog/blog.html">Blogs</a></li>
+                    <li><a class="nav-link active" href="./pages/auth/auth.html">My Account</a></li>
+                    <li><a class="nav-link active" href="./pages/cart/cart.html">Cart</a></li>
                 </ul>
-                <div class="d-flex gap-5">
-                    <a href="#" class="text-dark"><i class="fas fa-search"></i></a>
-                    <a href="#" class="text-dark"><i class="fas fa-user"></i></a>
+                <div class="sub-navbar d-flex justify-content-between gap-3">
+                    <div class="col-md-8 col-12">
+                        <form class="d-flex">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-success" type="submit"><i class="fas fa-search"></i></button>
+                        </form>
+                    </div>
+                    <a href="./pages/auth/auth.html" class="text-dark"><i class="fas fa-user"></i></a>
                     <div class="user-icon">
-                        <i class="fas fa-shopping-bag text-white"></i>
+                        <a href="./pages/cart/cart.html"><i class="fas fa-shopping-bag text-white"></i></a>
                     </div>
                 </div>
             </div>
@@ -56,7 +66,7 @@
                         <div class="hero-content">
                             <h2>NIKE AIR MAX</h2>
                             <p>Nike introducing the new air max for everyone's comfort</p>
-                            <button class="btn btn-primary">SHOP NOW</button>
+                            <button class="btn btn-primary" onclick="window.location.href='./pages/products/products.html'">SHOP NOW</button>
                         </div>
                     </div>
                     <div class="col-md-6 text-center">
@@ -273,9 +283,9 @@
                 <div class="col-md-3 footer-links">
                     <h5>Company</h5>
                     <ul>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#">Blogs</a></li>
+                        <li><a href="./pages/about/about.html">About</a></li>
+                        <li><a href="./pages/contact/contact.html">Contact</a></li>
+                        <li><a href="./pages/blog/blog.html">Blogs</a></li>
                     </ul>
                 </div>
                 <div class="col-md-3">

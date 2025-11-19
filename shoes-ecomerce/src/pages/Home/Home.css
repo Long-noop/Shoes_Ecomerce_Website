@@ -1,50 +1,3 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    font-size: clamp(12px, 2vw, 16px);
-}
-
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f5f5f5;
-}
-
-/* Navbar */
-.navbar {
-    background-color: #e5e5e5;
-    padding: 1rem 2rem; 
-}
-.navbar-brand {
-    font-weight: 900;
-    font-size: 1.8rem;
-    letter-spacing: 2px;
-}
-
-.nav-link {
-    color: #000;
-    font-weight: 600;
-    margin: 0 1rem;
-}
-.nav-link.active{
-    display: none;
-}
-.text-dark i {
-    font-size: 30px;
-}
-.user-icon {
-    background-color: #ffa500;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 /* Hero Section */
 .hero-section {
     padding: 3rem 2rem 2rem;
@@ -130,7 +83,7 @@ body {
     font-weight: 900;
 }
 
-.product-card {
+.new-drops .product-card {
     background: #fff;
     border-radius: 15px;
     padding: 1.5rem;
@@ -139,11 +92,11 @@ body {
     transition: transform 0.3s;
 }
 
-.product-card:hover {
+.new-drops .product-card:hover {
     transform: translateY(-5px);
 }
 
-.badge-new {
+.new-drops .badge-new {
     position: absolute;
     top: 15px;
     left: 15px;
@@ -264,105 +217,4 @@ body {
     object-fit: cover;
     border-radius: 10px;
     margin-top: 1rem;
-}
-
-/* Newsletter Section */
-.newsletter {
-    background-color: #4169e1;
-    padding: 3rem 2rem;
-    border-radius: 20px;
-    margin: 2rem;
-    color: #fff;
-}
-
-.newsletter h2 {
-    font-size: 2rem;
-    font-weight: 900;
-    margin-bottom: 1rem;
-}
-
-.newsletter-form {
-    display: flex;
-    gap: 1rem;
-    max-width: 500px;
-}
-
-.newsletter-form input {
-    flex: 1;
-    padding: 1rem;
-    border: none;
-    border-radius: 8px;
-}
-
-.newsletter-form button {
-    background-color: #000;
-    color: #fff;
-    border: none;
-    padding: 1rem 2rem;
-    border-radius: 8px;
-    font-weight: 600;
-}
-
-/* Footer */
-footer {
-    background-color: #000;
-    color: #fff;
-    padding: 3rem 2rem;
-}
-
-.footer-logo {
-    font-size: 4rem;
-    font-weight: 900;
-    letter-spacing: 3px;
-}
-
-.footer-links h5 {
-    font-weight: 700;
-    margin-bottom: 1rem;
-    color: #ffa500;
-}
-
-.footer-links ul {
-    list-style: none;
-    padding: 0;
-}
-
-.footer-links ul li {
-    margin-bottom: 0.5rem;
-}
-
-.footer-links ul li a {
-    color: #fff;
-    text-decoration: none;
-}
-
-.social-icons a {
-    color: #fff;
-    margin-right: 1rem;
-    font-size: 1.2rem;
-}
-
-.toggle-icons {
-    display: flex;
-    gap: 10px;
-}
-
-.toggle-btn {
-    width: 30px;
-    height: 30px;
-    background-color: #666;
-    border-radius: 5px;
-}
-
-.toggle-btn.active {
-    background-color: #fff;
-}
-
-@media (max-width:452px){
-    .nav-link.active{
-        display: block;
-    }
-    .navbar .text-dark, .navbar .user-icon {
-        display: none;
-    }
 }

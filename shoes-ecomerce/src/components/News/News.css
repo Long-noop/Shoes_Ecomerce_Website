@@ -1,0 +1,46 @@
+.newsletter {
+    background-color: #4169e1;
+    padding: 3rem 2rem;
+    border-radius: 20px;
+    margin: 3rem 2rem 2rem;
+    color: #fff;
+}
+
+.newsletter h2 {
+    font-size: 2rem;
+    font-weight: 900;
+    margin-bottom: 0.5rem;
+}
+
+.newsletter p {
+    margin-bottom: 1.5rem;
+}
+
+.newsletter-form {
+    display: flex;
+    gap: 1rem;
+    max-width: 500px;
+}
+
+.newsletter-form input {
+    flex: 1;
+    padding: 1rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+.newsletter-form button {
+    background-color: #000;
+    color: #fff;
+    border: none;
+    padding: 1rem 2.5rem;
+    border-radius: 8px;
+    font-weight: 700;
+}
+
+.kicks-logo-white {
+    font-size: 5rem;
+    font-weight: 900;
+    letter-spacing: 5px;
+}

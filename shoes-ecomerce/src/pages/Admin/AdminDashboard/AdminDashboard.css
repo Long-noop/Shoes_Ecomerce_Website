@@ -1,0 +1,176 @@
+.stat-card {
+    border-radius: 8px;
+    padding: 1.5rem;
+    background: white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.stat-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.stat-value {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 8px 0 4px 0;
+}
+
+.stat-change {
+    color: var(--success-color);
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.stat-label {
+    font-size: 14px;
+    color: #6c757d;
+    margin-bottom: 4px;
+}
+
+.chart-card {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.chart-title {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.chart-tabs {
+    display: flex;
+    gap: 8px;
+}
+
+.chart-tab {
+    padding: 6px 16px;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    background: white;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.chart-tab.active {
+    background: black;
+    color: white;
+    border-color: black;
+}
+
+.bestseller-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.bestseller-item:last-child {
+    border-bottom: none;
+}
+
+.bestseller-img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 16px;
+}
+
+.bestseller-info {
+    flex: 1;
+}
+
+.bestseller-name {
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.bestseller-sales {
+    font-size: 13px;
+    color: #6c757d;
+}
+
+.bestseller-price {
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.table-card {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.status-badge {
+    padding: 4px 12px;
+    border-radius: 16px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.status-delivered {
+    background-color: #DBEAFE;
+    color: #1E40AF;
+}
+
+.status-cancelled {
+    background-color: #FEF3C7;
+    color: #92400E;
+}
+
+.customer-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.btn-report {
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 8px 24px;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.sidebar {
+    background: white;
+    min-height: 100vh;
+    border-right: 1px solid #e9ecef;
+}
+
+.date-range {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+canvas {
+    width: 100% !important;
+    height: 300px !important;
+}

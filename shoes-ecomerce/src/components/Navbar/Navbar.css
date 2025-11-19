@@ -1,0 +1,39 @@
+.user-site .navbar {
+    background-color: #e5e5e5;
+    padding: 1rem 2rem; 
+}
+.user-site .navbar-brand {
+    font-weight: 900;
+    font-size: 2rem;
+    letter-spacing: 2px;
+}
+
+.user-site .nav-link {
+    color: #000;
+    font-weight: 600;
+    margin: 0 1rem;
+}
+.user-site .nav-link.active{
+    display: none;
+}
+.user-site .text-dark i {
+    font-size: 30px;
+}
+.user-site .user-icon {
+    background-color: #ffa500;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-width:452px){
+    .user-site .nav-link.active{
+        display: block;
+    }
+    .user-site .navbar .text-dark, .user-site .navbar .user-icon {
+        display: none;
+    }
+}

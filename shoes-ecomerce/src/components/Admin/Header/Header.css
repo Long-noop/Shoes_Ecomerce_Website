@@ -1,0 +1,10 @@
+:root {
+    --primary-color: #5D5FEF;
+    --success-color: #16A34A;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 900;
+    letter-spacing: -1px;
+}
