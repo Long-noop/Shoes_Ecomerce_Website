@@ -21,6 +21,14 @@ import ProductDetails from './pages/ProductDetails/ProductDetails'
 import UserLayout from './layouts/UserLayout.jsx'
 import AdminLayout from './layouts/AdminLayout.jsx'
 import AdminDashboard from './pages/Admin/AdminDashboard/AdminDashboard.jsx'
+import AllProduct from './pages/Admin/AllProducts/AllProduct.jsx'
+import OrderList from './pages/Admin/OrderList/OrderList.jsx'
+import User from './pages/Admin/User/User.jsx'
+import News from './pages/Admin/News/News.jsx'
+import AdminContact from './pages/Admin/AdminContact/AdminContact.jsx'
+import AdminProductDetails from './pages/Admin/AdminProductDetails/AdminProductDetails.jsx'
+import AdminOrderDetails from './pages/Admin/AdminOrderDetails/AdminOrderDetails.jsx'
+import AdminNewsDetails from './pages/Admin/AdminNewsDetails/AdminNewsDetails.jsx'
 
 function App() {
   return (
@@ -51,9 +59,18 @@ function App() {
 
         <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<AdminDashboard />} />
-          {/* Thêm route admin sau này */}
-          {/* <Route path="users" element={<AdminUsers />} /> */}
-          {/* <Route path="products" element={<AdminProducts />} /> */}
+          <Route path='dashboard' element={<AdminDashboard />} />
+          <Route path='products' element={<AllProduct />} />
+          <Route path="products/add" element={<AdminProductDetails />} />
+          <Route path="products/details/:id" element={<AdminProductDetails />} />
+          <Route path='order-list' element={<OrderList />} />
+          <Route path='order-list' element={<OrderList />} />
+          <Route path='order-details/:id' element={<AdminOrderDetails />} />
+          <Route path='user-management' element={<User />} />
+          <Route path='contact' element={<AdminContact />} />
+          <Route path='news' element={<News />} />
+          <Route path='news-details' element={<AdminNewsDetails />} />
+          <Route path='news-details/:id' element={<AdminNewsDetails />} />
         </Route>
       </Routes>
     </>

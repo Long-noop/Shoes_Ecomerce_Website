@@ -1,6 +1,8 @@
 :root {
     --primary-color: #5D5FEF;
     --success-color: #16A34A;
+    --danger-color: #e7320a;
+    --warning-color: #f5f50c;
 }
 
 .logo {

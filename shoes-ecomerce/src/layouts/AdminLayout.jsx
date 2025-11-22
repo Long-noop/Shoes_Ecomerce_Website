@@ -14,7 +14,13 @@ const AdminLayout = () => {
     <>
       <Header/>
       <Sidebar/>
-        <Outlet/>
+        <div className="page-wrapper">
+          <div className="me-3 ms-auto m-2">
+            <i className="ti ti-calendar"></i>
+            <span>Feb 16,2022 - Feb 20,2022</span>
+          </div> 
+          <Outlet/>
+        </div>
       <Footer/>
     </>
   );

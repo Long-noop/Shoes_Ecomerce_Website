@@ -1,0 +1,108 @@
+.admin-orders {    
+    .page-header-custom {
+    background: white;
+    padding: 20px 10px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid #e9ecef;
+    }
+
+    .breadcrumb-custom {
+        color: #6c757d;
+        font-size: 14px;
+    }
+    
+    .table-card {
+        background: white;
+        border-radius: 8px;
+        padding: 1.5rem;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    .status-badge {
+        padding: 4px 12px;
+        border-radius: 16px;
+        font-size: 12px;
+        font-weight: 500;
+    }
+    
+    .status-delivered {
+        background-color: #DBEAFE;
+        color: #1E40AF;
+    }
+    
+    .status-cancelled {
+        background-color: #FEF3C7;
+        color: #92400E;
+    }
+    
+    .customer-avatar {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        margin-right: 8px;
+    }
+    
+    .btn-report {
+        background-color: black;
+        color: white;
+        border: none;
+        padding: 8px 24px;
+        border-radius: 6px;
+        font-weight: 500;
+        cursor: pointer;
+    }
+    
+    .sidebar {
+        background: white;
+        min-height: 100vh;
+        border-right: 1px solid #e9ecef;
+    }
+    
+    .date-range {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 16px;
+        border: 1px solid #dee2e6;
+        border-radius: 6px;
+        font-size: 14px;
+    }
+    
+    canvas {
+        width: 100% !important;
+        height: 300px !important;
+    }
+
+    .pagination {
+        display: flex;
+        gap: 8px;
+        justify-content: center;
+        margin-top: 32px;
+    }
+    
+    .page-btn {
+        width: 40px;
+        height: 40px;
+        border: 1px solid #dee2e6;
+        background: white;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: all 0.2s;
+    }
+    
+    .page-btn:hover {
+        background-color: #f8f9fa;
+    }
+    
+    .page-btn.active {
+        background-color: black;
+        color: white;
+        border-color: black;
+    }
+    
+    .page-btn-next {
+        padding: 0 16px;
+        width: auto;
+    }
+}

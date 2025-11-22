@@ -108,7 +108,7 @@
     font-weight: 600;
 }
 
-.product-card img {
+.new-drops .product-card img {
     width: 100%;
     height: 200px;
     object-fit: contain;

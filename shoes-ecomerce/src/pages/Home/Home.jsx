@@ -4,29 +4,29 @@ import { Link } from 'react-router-dom'
 const Home = () => {
   return (
     <div>
-      <section class="hero-section">
-        <div class="container">
-            <h1 class="hero-title">DO IT <span class="blue">RIGHT</span></h1>
-            <div class="hero-card">
-                <div class="row align-items-center">
-                    <div class="col-md-6">
-                        <div class="hero-content">
-                            <h2>NIKE AIR MAX</h2>
-                            <p>Nike introducing the new air max for everyone's comfort</p>
-                            <Link to="/products" className="btn btn-primary">SHOP NOW</Link>
+        <section class="hero-section">
+            <div class="container">
+                <h1 class="hero-title">DO IT <span class="blue">RIGHT</span></h1>
+                <div class="hero-card">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <div class="hero-content">
+                                <h2>NIKE AIR MAX</h2>
+                                <p>Nike introducing the new air max for everyone's comfort</p>
+                                <Link to="/products" className="btn btn-primary">SHOP NOW</Link>
+                            </div>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500" alt="Nike Air Max"/>
                         </div>
                     </div>
-                    <div class="col-md-6 text-center">
-                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500" alt="Nike Air Max"/>
+                    <div class="thumbnail-images">
+                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=100" alt="Thumbnail 1"/>
+                        <img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=100" alt="Thumbnail 2"/>
                     </div>
                 </div>
-                <div class="thumbnail-images">
-                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=100" alt="Thumbnail 1"/>
-                    <img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=100" alt="Thumbnail 2"/>
-                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
     <section class="new-drops">
         <div class="container">
