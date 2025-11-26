@@ -1,9 +1,19 @@
-import React from 'react'
-import './MyAccount.css'
-import { NavLink, Outlet } from "react-router-dom";
+import React, { use } from 'react'
+import './MyAccount.scss'
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import { useAuth } from '../../contexts/AuthContext';
 const MyAccount = () => {
+
+    const {logout, user} = useAuth();
+    const navigate = useNavigate();
+    
+    const handleLogout = async () => {
+        await logout();
+        navigate("/login", { replace: true });
+    };
+
   return (
-    <div className="account-container">
+    <div className="account-container user-account">
         <div className="account-grid">
             <aside className="account-sidebar">
                 <div className="user-profile">
@@ -14,8 +24,8 @@ const MyAccount = () => {
                             <input type="file" id="avatarUpload" style={{display: "none"}} accept="image/*"/>
                         </div>
                     </div>
-                    <h3 className="user-name">John Anderson</h3>
-                    <p className="user-email">john.anderson@email.com</p>
+                    <h3 className="user-name">{user?.name}</h3>
+                    <p className="user-email">{user?.email}</p>
                 </div>
 
                 <ul className="sidebar-menu">
@@ -56,10 +66,10 @@ const MyAccount = () => {
                         </NavLink>
                     </li>
                     <li className="menu-item">
-                        <NavLink to="/login" className="menu-link logout">
+                        <div onClick={handleLogout} className="menu-link logout">
                             <i className="fas fa-sign-out-alt"></i>
                             <span>Logout</span>
-                        </NavLink>
+                        </div>
                     </li>
                 </ul>
             </aside>

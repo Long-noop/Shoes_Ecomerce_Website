@@ -44,3 +44,10 @@
     font-weight: 900;
     letter-spacing: 5px;
 }
+
+@media (max-width: 768px) {
+    .newsletter-form{
+        display: flex;
+        flex-direction: column;
+    }
+}

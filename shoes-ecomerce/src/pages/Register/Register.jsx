@@ -1,6 +1,96 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Register.css'
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../contexts/AuthContext';
 const Register = () => {
+    const navigate = useNavigate();
+    const { register } = useAuth();
+    
+    const [formData, setFormData] = useState({
+        email: '',
+        password: '',
+        confirmPassword: '',
+        first_name: '',
+        last_name: '',
+    });
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
+    const [errors, setErrors] = useState({});
+
+    const handleChange = (e) => {
+        setFormData({
+        ...formData,
+        [e.target.name]: e.target.value,
+        });
+        setError('');
+        setErrors({});
+    };
+
+    const validateForm = () => {
+        const newErrors = {};
+
+        if (!formData.first_name) {
+        newErrors.first_name = 'First name is required';
+        }
+
+        if (!formData.last_name) {
+        newErrors.last_name = 'Last name is required';
+        }
+
+        if (!formData.email) {
+        newErrors.email = 'Email is required';
+        } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+        newErrors.email = 'Email is invalid';
+        }
+
+        if (!formData.password) {
+        newErrors.password = 'Password is required';
+        } else if (formData.password.length < 8) {
+        newErrors.password = 'Password must be at least 8 characters';
+        }
+
+        if (formData.password !== formData.confirmPassword) {
+        newErrors.confirmPassword = 'Passwords do not match';
+        }
+
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
+
+    const handleSubmit = async (e) => {
+        console.log("Clicked register!");
+        console.log("register:", register);
+
+        e.preventDefault();
+        
+        if (!validateForm()) {
+            return;
+        }
+
+        setLoading(true);
+        setError('');
+
+        try {
+            const { confirmPassword, ...registerData } = formData;
+            const response = await register(registerData);
+            
+            if (response.success) {
+                navigate('/', { replace: true });
+            } else {
+                setError(response.message || 'Registration failed');
+                if (response.errors) {
+                setErrors(response.errors);
+                }
+            }
+        } catch (err) {
+            setError(err.message || 'Registration failed. Please try again.');
+            if (err.errors) {
+                setErrors(err.errors);
+            }
+        } finally {
+            setLoading(false);
+        }
+    };
   return (
     <div className="auth-container">
         <div id="registerSection" className="auth-section">
@@ -21,40 +111,101 @@ const Register = () => {
                         </div>
                     </div>
 
-                    <div className="divider">OR</div>
+                    {error && (
+                        <div className="alert alert-danger" role="alert">
+                        {error}
+                        </div>
+                    )}
 
-                    <form>
+                    <form onSubmit={handleSubmit}>
                         <label className="form-label">Your Name</label>
-                        <input type="text" className="form-control" placeholder="First Name"/>
-                        <input type="text" className="form-control" placeholder="Last Name"/>
+                        <input type="text" 
+                        className={`form-control ${errors.first_name ? 'is-invalid' : ''}`} 
+                        placeholder="First Name"
+                        id="first_name"
+                        name="first_name"
+                        value={formData.first_name}
+                        onChange={handleChange}
+                        required/>
+                        {errors.first_name && (
+                            <div className="invalid-feedback">{errors.first_name}</div>
+                        )}
 
-                        <label className="form-label">Gender</label>
+                        <input type="text" 
+                        className={`form-control ${errors.last_name ? 'is-invalid' : ''}`} 
+                        placeholder="Last Name"
+                        id="last_name"
+                        name="last_name"
+                        value={formData.last_name}
+                        onChange={handleChange}
+                        required/>
+                        {errors.first_name && (
+                            <div className="invalid-feedback">{errors.last_name}</div>
+                        )}
+
+                        {/* <label className="form-label">Gender</label>
                         <div className="gender-group">
                             <div className="gender-option">
                                 <input type="checkbox" id="male"/>
-                                <label for="male">Male</label>
+                                <label htmlFor="male">Male</label>
                             </div>
                             <div className="gender-option">
                                 <input type="checkbox" id="female"/>
-                                <label for="female">Female</label>
+                                <label htmlFor="female">Female</label>
                             </div>
                             <div className="gender-option">
                                 <input type="checkbox" id="other"/>
-                                <label for="other">Other</label>
+                                <label htmlFor="other">Other</label>
                             </div>
-                        </div>
+                        </div> */}
 
-                        <label className="form-label">Login Details</label>
-                        <input type="email" className="form-control" placeholder="Email"/>
-                        <input type="password" className="form-control" placeholder="Password"/>
-                        <p className="password-hint">
+                        <input type="email" 
+                        placeholder="Email"
+                        className={`form-control ${errors.email ? 'is-invalid' : ''}`}
+                        id="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        required/>
+                        {errors.email && (
+                            <div className="invalid-feedback">{errors.email}</div>
+                        )}
+
+                        <input type="password" 
+                        placeholder="Password"
+                        className={`form-control ${errors.password ? 'is-invalid' : ''}`}
+                        id="password"
+                        name="password"
+                        value={formData.password}
+                        onChange={handleChange}
+                        required
+                        />
+                        {errors.password && (
+                            <div className="invalid-feedback">{errors.password}</div>
+                        )}
+
+                        {/* <p className="password-hint">
                             Minimum 8 characters with at least one uppercase, one lowercase, one special 
                             character and a number
-                        </p>
+                        </p> */}
+          
+                        <input
+                            type="password"
+                            placeholder="Confirm Password"
+                            className={`form-control ${errors.confirmPassword ? 'is-invalid' : ''}`}
+                            id="confirmPassword"
+                            name="confirmPassword"
+                            value={formData.confirmPassword}
+                            onChange={handleChange}
+                            required
+                        />
+                        {errors.confirmPassword && (
+                            <div className="invalid-feedback">{errors.confirmPassword}</div>
+                        )}
 
                         <div className="form-check">
                             <input type="checkbox" id="agreeTerms"/>
-                            <label for="agreeTerms">
+                            <label htmlFor="agreeTerms">
                                 By clicking 'Log In' you agree to our website KicksClub Terms & Conditions, 
                                 Kicks Privacy Notice and Terms & Conditions.
                             </label>
@@ -62,16 +213,33 @@ const Register = () => {
 
                         <div className="form-check">
                             <input type="checkbox" id="keepLoggedRegister"/>
-                            <label for="keepLoggedRegister">
+                            <label htmlFor="keepLoggedRegister">
                                 Keep me logged in - applies to all log in options below. <a href="#">More info</a>
                             </label>
                         </div>
 
-                        <button type="submit" className="btn-primary-custom">
+                        <button type="submit" className="btn-primary-custom" disabled={loading}>
                             <span>REGISTER</span>
                             <i className="fas fa-arrow-right"></i>
                         </button>
+                        {loading ? (
+                            <>
+                            <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                            Creating account...
+                            </>
+                        ) : ('')
+                            }
                     </form>
+
+                    <p style={{ marginTop: '1rem'}}>
+                        Already have an account? 
+                        <span 
+                            style={{ color: '#007bff', cursor: 'pointer', marginLeft: '5px' }}
+                            onClick={() => navigate('/login')}
+                        >
+                            Login?
+                        </span>
+                    </p>
                 </div>
 
                 <div className="info-card">

@@ -29,51 +29,57 @@ import AdminContact from './pages/Admin/AdminContact/AdminContact.jsx'
 import AdminProductDetails from './pages/Admin/AdminProductDetails/AdminProductDetails.jsx'
 import AdminOrderDetails from './pages/Admin/AdminOrderDetails/AdminOrderDetails.jsx'
 import AdminNewsDetails from './pages/Admin/AdminNewsDetails/AdminNewsDetails.jsx'
+import { AuthProvider } from './contexts/AuthContext.jsx'
+import { CartProvider } from './contexts/CartContext.jsx'
+import { GuestRoute } from './components/GuestRoute.jsx'
+import { ProtectedRoute } from './components/ProtectedRoute.jsx'
 
 function App() {
   return (
-    <>
-      <Routes>
-        <Route element = {<UserLayout/>}>
-          <Route path='' element={<Home/>}/>
-          <Route path='about' element={<About/>} />
-          <Route path='contact' element={<Contact/>} />
-          <Route path='blogs' element={<Blog/>} />
-          <Route path='products' element={<Products/>} />
-          <Route path='cart' element={<Cart/>} />
-          <Route path='checkout' element={<Checkout/>} />
-          <Route path='login' element={<Login/>} />
-          <Route path='register' element={<Register/>} />
-          <Route path='details' element={<ProductDetails/>} />
+    <AuthProvider>
+      <CartProvider>
+        <Routes>
+          <Route element = {<UserLayout/>}>
+            <Route path='' element={<Home/>}/>
+            <Route path='about' element={<About/>} />
+            <Route path='contact' element={<Contact/>} />
+            <Route path='blogs' element={<Blog/>} />
+            <Route path='products' element={<Products/>} />
+            <Route path='cart' element={<ProtectedRoute><Cart/></ProtectedRoute>} />
+            <Route path='checkout' element={<ProtectedRoute><Checkout/></ProtectedRoute>} />
+            <Route path='login' element={<GuestRoute><Login/></GuestRoute>} />
+            <Route path='register' element={<GuestRoute><Register/></GuestRoute> } />
+            <Route path='details/:id' element={<ProductDetails/>} />
 
-          <Route path='my-account' element={<MyAccount/>}>
-            <Route index element={<Dashboard />} />
-            <Route path="dashboard" element={<Dashboard />} />
-            <Route path="profile" element={<Profile />} />
-            <Route path="orders" element={<Orders />} />
-            <Route path="wishlist" element={<Wishlist />} />
-            <Route path="addresses" element={<Addresses />} />
-            <Route path="security" element={<Security />} />
+            <Route path='my-account' element={<ProtectedRoute><MyAccount/></ProtectedRoute>}>
+              <Route index element={<Dashboard />} />
+              <Route path="dashboard" element={<Dashboard />} />
+              <Route path="profile" element={<Profile />} />
+              <Route path="orders" element={<Orders />} />
+              <Route path="wishlist" element={<Wishlist />} />
+              <Route path="addresses" element={<Addresses />} />
+              <Route path="security" element={<Security />} />
+            </Route>
           </Route>
-        </Route>
 
-        <Route path="/admin" element={<AdminLayout />}>
-          <Route index element={<AdminDashboard />} />
-          <Route path='dashboard' element={<AdminDashboard />} />
-          <Route path='products' element={<AllProduct />} />
-          <Route path="products/add" element={<AdminProductDetails />} />
-          <Route path="products/details/:id" element={<AdminProductDetails />} />
-          <Route path='order-list' element={<OrderList />} />
-          <Route path='order-list' element={<OrderList />} />
-          <Route path='order-details/:id' element={<AdminOrderDetails />} />
-          <Route path='user-management' element={<User />} />
-          <Route path='contact' element={<AdminContact />} />
-          <Route path='news' element={<News />} />
-          <Route path='news-details' element={<AdminNewsDetails />} />
-          <Route path='news-details/:id' element={<AdminNewsDetails />} />
-        </Route>
-      </Routes>
-    </>
+          <Route path="/admin" element={<ProtectedRoute requireAdmin={true}><AdminLayout /></ProtectedRoute>}>
+            <Route index element={<AdminDashboard />} />
+            <Route path='dashboard' element={<AdminDashboard />} />
+            <Route path='products' element={<AllProduct />} />
+            <Route path="products/add" element={<AdminProductDetails />} />
+            <Route path="products/details/:id" element={<AdminProductDetails />} />
+            <Route path='order-list' element={<OrderList />} />
+            <Route path='order-list' element={<OrderList />} />
+            <Route path='order-details/:id' element={<AdminOrderDetails />} />
+            <Route path='user-management' element={<User />} />
+            <Route path='contact' element={<AdminContact />} />
+            <Route path='news' element={<News />} />
+            <Route path='news-details' element={<AdminNewsDetails />} />
+            <Route path='news-details/:id' element={<AdminNewsDetails />} />
+          </Route>
+        </Routes>
+      </CartProvider>
+    </AuthProvider>
   )
 }
 
