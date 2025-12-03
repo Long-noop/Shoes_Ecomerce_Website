@@ -38,7 +38,6 @@
     padding: 10px;
     border-radius: 10px;
     font-weight: 600;
-    width: 100%;
     font-size: 0.8rem;
     text-transform: uppercase;
     cursor: pointer;
@@ -54,5 +53,8 @@
     }
     .user-site .navbar .text-dark, .user-site .navbar .user-icon {
         display: none;
+    }
+    .sub-navbar{
+        justify-content: flex-end;
     }
 }

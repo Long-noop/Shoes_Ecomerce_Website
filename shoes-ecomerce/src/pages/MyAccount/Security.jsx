@@ -1,6 +1,80 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { authService } from '../../services/authService';
 
 const Security = () => {
+  const [formData, setFormData] = useState({
+    current_password: '',
+    new_password: '',
+    confirm_password: '',
+  });
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState({ type: '', text: '' });
+  const [errors, setErrors] = useState({});
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+    setMessage({ type: '', text: '' });
+    setErrors({});
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+
+    if (!formData.current_password) {
+      newErrors.current_password = 'Current password is required';
+    }
+
+    if (!formData.new_password) {
+      newErrors.new_password = 'New password is required';
+    } else if (formData.new_password.length < 8) {
+      newErrors.new_password = 'Password must be at least 8 characters';
+    }
+
+    if (formData.new_password !== formData.confirm_password) {
+      newErrors.confirm_password = 'Passwords do not match';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!validateForm()) {
+      return;
+    }
+
+    setLoading(true);
+    setMessage({ type: '', text: '' });
+
+    try {
+      const response = await authService.changePassword(
+        formData.current_password,
+        formData.new_password
+      );
+
+      if (response.success) {
+        setMessage({ type: 'success', text: 'Password changed successfully!' });
+        setFormData({
+          current_password: '',
+          new_password: '',
+          confirm_password: '',
+        });
+      }
+    } catch (error) {
+      setMessage({
+        type: 'danger',
+        text: error.message || 'Failed to change password',
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <section id="security" className="content-section">
       <h2 className="section-title">Security Settings</h2>
@@ -11,20 +85,58 @@ const Security = () => {
       </div>
 
       <h3 style={{ marginBottom: '1.5rem', fontSize: '1.3rem' }}>Change Password</h3>
-      <form>
+      {message.text && (
+        <div className={`alert alert-${message.type}`} role="alert">
+          {message.text}
+        </div>
+      )}
+      <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label className="form-label">Current Password</label>
-          <input type="password" className="form-control" placeholder="Enter current password" />
+              <input
+                type="password"
+                placeholder="Enter current password"
+                className={`form-control ${errors.current_password ? 'is-invalid' : ''}`}
+                name="current_password"
+                value={formData.current_password}
+                onChange={handleChange}
+                required
+              />
+              {errors.current_password && (
+                <div className="invalid-feedback">{errors.current_password}</div>
+              )}
         </div>
 
         <div className="form-group">
           <label className="form-label">New Password</label>
-          <input type="password" className="form-control" placeholder="Enter new password" />
+              <input
+                type="password"
+                placeholder="Enter new password"
+                className={`form-control ${errors.new_password ? 'is-invalid' : ''}`}
+                name="new_password"
+                value={formData.new_password}
+                onChange={handleChange}
+                required
+              />
+              {errors.new_password && (
+                <div className="invalid-feedback">{errors.new_password}</div>
+              )}
         </div>
 
         <div className="form-group">
           <label className="form-label">Confirm New Password</label>
-          <input type="password" className="form-control" placeholder="Confirm new password" />
+              <input
+                type="password"
+                placeholder="Confirm new password"
+                className={`form-control ${errors.confirm_password ? 'is-invalid' : ''}`}
+                name="confirm_password"
+                value={formData.confirm_password}
+                onChange={handleChange}
+                required
+              />
+              {errors.confirm_password && (
+                <div className="invalid-feedback">{errors.confirm_password}</div>
+              )}
         </div>
 
         <div style={{ backgroundColor: '#f8f8f8', padding: '1rem', borderRadius: '8px', marginBottom: '1.5rem' }}>
@@ -37,8 +149,19 @@ const Security = () => {
           </ul>
         </div>
 
-        <button type="submit" className="btn-primary">Update Password</button>
-        <button type="button" className="btn-secondary">Cancel</button>
+        <button type="submit" className="btn-primary">
+          {loading ? 'Updating...' : 'Change Password'}
+        </button>
+        <button type="button" className="btn-secondary"
+        onClick={()=>{
+          setFormData({
+            current_password: '',
+            new_password: '',
+            confirm_password: '',
+          })
+        }}>
+          Cancel
+        </button>
       </form>
 
       <hr style={{ margin: '3rem 0', border: '1px solid #f0f0f0' }} />

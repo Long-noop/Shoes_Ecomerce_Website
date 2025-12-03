@@ -1,6 +1,72 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './AdminOrderDetails.scss'
+import { useNavigate, useParams } from 'react-router-dom';
+import { orderService } from '../../../services/orderService';
+
 const AdminOrderDetails = () => {
+    const { id } = useParams();
+    const navigate = useNavigate();
+    const [order, setOrder] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        loadOrder();
+    }, [id]);
+
+    const loadOrder = async () => {
+        setLoading(true);
+        try {
+            const response = await orderService.getOrder(id);
+            if (response.success) {
+                setOrder(response.data);
+            }
+        } catch (error) {
+            alert('Failed to load order');
+            navigate('/admin/order-list');
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleStatusChange = async (newStatus) => {
+        try {
+        const response = await orderService.updateOrderStatus(id, newStatus);
+        if (response.success) {
+            alert('Order status updated successfully');
+            loadOrder();
+        }
+        } catch (error) {
+        alert(error.message || 'Failed to update order status');
+        }
+    };
+
+    const getStatusBadge = (status) => {
+        const badges = {
+        pending: 'bg-warning',
+        processing: 'bg-info',
+        shipped: 'bg-primary',
+        completed: 'bg-success',
+        cancelled: 'bg-danger',
+        };
+        return badges[status] || 'bg-secondary';
+    };
+
+    if (loading) {
+        return (
+        <div className="page-body">
+            <div className="container-xl">
+            <div className="text-center py-5">
+                <div className="spinner-border" role="status"></div>
+            </div>
+            </div>
+        </div>
+        );
+    }
+
+    if (!order) return null;
+
+    const items = order.items || [];
+
   return (
     <div className="page-body admin-order-details">
         <div className="container-fluid">
@@ -10,19 +76,27 @@ const AdminOrderDetails = () => {
                     <div className="breadcrumb-custom">Home {'>'} Order List {'>'} Order Details</div>
                 </div>
             </div>
-
+            <div className="col-auto text-end">
+                <button
+                    onClick={() => navigate('/admin/orders')}
+                    className="btn btn-outline-dark btn-sm mb-3"
+                >
+                    <i className="ti ti-arrow-left me-2"></i>
+                    Back to Orders
+                </button>
+            </div>
             <div className="order-header">
                 <div className="order-title-row">
                     <div className="order-title">
-                        Orders ID: #6743
-                        <span className="status-badge">Pending</span>
+                        Orders ID: #{order.id}
+                        <span className={`badge ${getStatusBadge(order.status)}`} style={{color:"white"}}>{order.status}</span>
                     </div>
                     <div className="order-actions">
-                        <select className="btn">
+                        <select className="btn" value={order.status} onChange={(e) => handleStatusChange(e.target.value)}>
                             <option selected disabled hidden>Change Status</option>
                             <option value="Pending">Pending</option>
                             <option value="Processing">Processing</option>
-                            <option value="Delivered">Delivered</option>
+                            <option value="Completed">Completed</option>
                             <option value="Cancelled">Cancelled</option>
                         </select>
                         <button className="btn-action">
@@ -33,7 +107,10 @@ const AdminOrderDetails = () => {
                 </div>
                 <div className="order-date">
                     <i className="ti ti-calendar"></i>
-                    Feb 16,2022 - Feb 20,2022
+                        {new Date(order.created_at).toLocaleDateString()}
+                    <small className="text-muted">
+                        {new Date(order.created_at).toLocaleTimeString()}
+                    </small>
                 </div>
             </div>
 
@@ -63,7 +140,7 @@ const AdminOrderDetails = () => {
                     <div className="info-details">
                         <div><span className="info-label">Shipping:</span> Next express</div>
                         <div><span className="info-label">Payment Method:</span> Paypal</div>
-                        <div><span className="info-label">Status:</span> Pending</div>
+                        <div><span className="info-label">Status:</span> {order.status}</div>
                     </div>
                     <button className="btn-view-profile">Download info</button>
                 </div>
@@ -117,72 +194,45 @@ const AdminOrderDetails = () => {
                     <thead>
                         <tr>
                             <th><input type="checkbox"/></th>
+                            <th>Product ID</th>
                             <th>Product Name</th>
-                            <th>Order ID</th>
                             <th>Quantity</th>
+                            <th>Price</th>
                             <th style={{textAlign: "right"}}>Total</th>
                         </tr>
                     </thead>
                     <tbody>
+                        {items.map(item => (
                         <tr>
                             <td><input type="checkbox"/></td>
-                            <td>
+                            {/* <td>
                                 <div className="product-cell">
                                     <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=100" className="product-thumb" alt="Product"/>
                                     <span className="product-name">Adidas ultra boost</span>
                                 </div>
-                            </td>
-                            <td>#25421</td>
-                            <td>2</td>
-                            <td style={{textAlign: "right", fontWeight: 600}}>$800.40</td>
+                            </td> */}
+                            <td># {item.product_id}</td>
+                            <td>{item.product_name}</td>
+                            <td>{item.quantity}</td>
+                            <td style={{fontWeight: 600}}>${parseFloat(item.price).toFixed(2)}</td>
+                            <td style={{textAlign: "right", fontWeight: 600}}>${parseFloat(item.total).toFixed(2)}</td>
                         </tr>
-                        <tr>
-                            <td><input type="checkbox"/></td>
-                            <td>
-                                <div className="product-cell">
-                                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=100" className="product-thumb" alt="Product"/>
-                                    <span className="product-name">Adidas ultra boost</span>
-                                </div>
-                            </td>
-                            <td>#25421</td>
-                            <td>2</td>
-                            <td style={{textAlign: "right", fontWeight: 600}}>$800.40</td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"/></td>
-                            <td>
-                                <div className="product-cell">
-                                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=100" className="product-thumb" alt="Product"/>
-                                    <span className="product-name">Adidas ultra boost</span>
-                                </div>
-                            </td>
-                            <td>#25421</td>
-                            <td>2</td>
-                            <td style={{textAlign: "right", fontWeight: 600}}>$800.40</td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"/></td>
-                            <td>
-                                <div className="product-cell">
-                                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=100" className="product-thumb" alt="Product"/>
-                                    <span className="product-name">Adidas ultra boost</span>
-                                </div>
-                            </td>
-                            <td>#25421</td>
-                            <td>2</td>
-                            <td style={{textAlign: "right", fontWeight: 600}}>$800.40</td>
-                        </tr>
+                        ))}
                     </tbody>
                 </table>
 
                 <div className="order-summary">
                     <div className="summary-row">
                         <span className="summary-label">Subtotal</span>
-                        <span className="summary-value">$3,201.6</span>
+                        <span className="summary-value">${parseFloat(order.total_price).toFixed(2)}</span>
                     </div>
                     <div className="summary-row">
-                        <span className="summary-label">Tax (20%)</span>
-                        <span className="summary-value">$640.32</span>
+                        <span className="summary-label">Tax (0%)</span>
+                        <span className="summary-value">$0.00</span>
+                    </div>
+                    <div className="summary-row">
+                        <span className="summary-label">Delivery (Free)</span>
+                        <span className="summary-value">$0.00</span>
                     </div>
                     <div className="summary-row">
                         <span className="summary-label">Discount</span>
@@ -190,7 +240,7 @@ const AdminOrderDetails = () => {
                     </div>
                     <div className="summary-total">
                         <span>Total</span>
-                        <span>$3841.92</span>
+                        <span>${parseFloat(order.total_price).toFixed(2)}</span>
                     </div>
                 </div>
             </div>

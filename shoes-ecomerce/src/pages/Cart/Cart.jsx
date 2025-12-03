@@ -146,7 +146,7 @@ const Cart = () => {
                                         <i className="fas fa-plus"></i>
                                     </button>
                                 </div>
-                                <div className="item-price text-end">${(item.price * item.quantity).toFixed(2)}</div>
+                                <div className="item-price text-end"> ${(item.price * item.quantity).toFixed(2)}</div>
                             </div>
                         </div>
                     ))}

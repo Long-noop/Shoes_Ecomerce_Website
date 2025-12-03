@@ -1,135 +1,178 @@
-import React from 'react'
-import './Checkout.css'
+import React, { useEffect, useState } from 'react'
+import './Checkout.scss'
+import { useNavigate } from 'react-router-dom';
+import {useCart} from '../../contexts/CartContext'
+import { orderService } from '../../services/orderService';
+import { useAuth } from '../../contexts/AuthContext';
+
 const Checkout = () => {
+    const {isAuthenticated} = useAuth();
+    const navigate = useNavigate();
+    const {cartItems, total, loadCart} = useCart();
+    const [loading, setLoading] = useState(false);
+
+    useEffect(()=>{
+        loadCart();
+    },[])
+
+    const handlePlaceOrder = async () => {
+        setLoading(true);
+        try {
+            const orderData = {
+                total_price: total,
+                items: cartItems.map(item => ({
+                    product_id: item.product_id,
+                    quantity: item.quantity,
+                    price: item.price,
+                })),
+            };
+
+            const response = await orderService.createOrder(orderData);
+        
+            if (response.success) {
+                alert('Order placed successfully!');
+                navigate('/my-account/orders');
+            }
+        } catch (error) {
+            alert(error.message || 'Failed to place order');
+        } finally {
+            setLoading(false);
+        }
+    };
+    
   return (
-    <div class="checkout-container">
-        <div class="login-banner">
-            Login and Checkout faster
-        </div>
-
-        <div class="row">
-            <div class="col-lg-7">
-                <div class="section-card">
-                    <h2 class="section-title">Contact Details</h2>
-                    <p class="section-subtitle">We will use these details to keep you inform about your delivery.</p>
+    <div className="checkout-container">
+        {!isAuthenticated && ( 
+            <div className="login-banner">
+                Login and Checkout faster
+            </div>
+        )}
+        <div className="row">
+            <div className="col-lg-7">
+                <div className="section-card">
+                    <h2 className="section-title">Contact Details</h2>
+                    <p className="section-subtitle">We will use these details to keep you inform about your delivery.</p>
                     
-                    <div class="mb-3">
-                        <input type="email" class="form-control" placeholder="Email"/>
+                    <div className="mb-3">
+                        <input type="email" className="form-control" placeholder="Email"/>
                     </div>
                 </div>
 
-                <div class="section-card">
-                    <h2 class="section-title">Shipping Address</h2>
+                <div className="section-card">
+                    <h2 className="section-title">Shipping Address</h2>
                     
-                    <div class="row mb-3">
-                        <div class="col-md-6">
-                            <input type="text" class="form-control" placeholder="First Name*"/>
+                    <div className="row mb-3">
+                        <div className="col-md-6">
+                            <input type="text" className="form-control" placeholder="First Name*"/>
                         </div>
-                        <div class="col-md-6">
-                            <input type="text" class="form-control" placeholder="Last Name*"/>
+                        <div className="col-md-6">
+                            <input type="text" className="form-control" placeholder="Last Name*"/>
                         </div>
                     </div>
 
-                    <div class="mb-3">
-                        <input type="text" class="form-control" placeholder="Find Delivery Address*"/>
-                        <div class="helper-text">Start typing your street address or zip code for suggestion</div>
+                    <div className="mb-3">
+                        <input type="text" className="form-control" placeholder="Find Delivery Address*"/>
+                        <div className="helper-text">Start typing your street address or zip code for suggestion</div>
                     </div>
 
-                    <div class="mb-3">
-                        <input type="tel" class="form-control" placeholder="Phone Number*"/>
-                        <div class="helper-text">E.g. (123) 456-7890</div>
+                    <div className="mb-3">
+                        <input type="tel" className="form-control" placeholder="Phone Number*"/>
+                        <div className="helper-text">E.g. (123) 456-7890</div>
                     </div>
                 </div>
 
-                <div class="section-card">
-                    <h2 class="section-title">Delivery Options</h2>
+                <div className="section-card">
+                    <h2 className="section-title">Delivery Options</h2>
                     
-                    <div class="delivery-option selected">
+                    <div className="delivery-option selected">
                         <div>
-                            <h5 class="mb-1" style={{fontWeight: "600"}}>Standard Delivery</h5>
-                            <p class="mb-0 text-muted" style={{fontSize: "0.9rem"}}>Enter your address to see when you'll get your order</p>
+                            <h5 className="mb-1" style={{fontWeight: "600"}}>Standard Delivery</h5>
+                            <p className="mb-0 text-muted" style={{fontSize: "0.9rem"}}>Enter your address to see when you'll get your order</p>
                         </div>
-                        <div class="delivery-price">$6.00</div>
+                        <div className="delivery-price">$6.00</div>
                     </div>
 
-                    <div class="delivery-option">
+                    <div className="delivery-option">
                         <div>
-                            <h5 class="mb-1" style={{fontWeight: "600"}}>Collect in store</h5>
-                            <p class="mb-0 text-muted" style={{fontSize: "0.9rem"}}>Pay now, collect in store</p>
+                            <h5 className="mb-1" style={{fontWeight: "600"}}>Collect in store</h5>
+                            <p className="mb-0 text-muted" style={{fontSize: "0.9rem"}}>Pay now, collect in store</p>
                         </div>
-                        <span class="free-badge">Free</span>
+                        <span className="free-badge">Free</span>
                     </div>
                 </div>
 
-                <div class="section-card">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="billingCheck" checked/>
-                        <label class="form-check-label" for="billingCheck">
+                <div className="section-card">
+                    <div className="form-check">
+                        <input className="form-check-input" type="checkbox" id="billingCheck" defaultChecked/>
+                        <label className="form-check-label" htmlFor="billingCheck">
                             My billing and delivery information are the same
                         </label>
                     </div>
 
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="ageCheck" checked/>
-                        <label class="form-check-label" for="ageCheck">
+                    <div className="form-check">
+                        <input className="form-check-input" type="checkbox" id="ageCheck" defaultChecked/>
+                        <label className="form-check-label" htmlFor="ageCheck">
                             I'm 13+ year old
                         </label>
                     </div>
 
-                    <div class="mt-4 mb-3">
+                    <div className="mt-4 mb-3">
                         <p style={{fontWeight: "600"}}>Also want product updates with our newsletter?</p>
                     </div>
 
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="newsletterCheck" checked/>
-                        <label class="form-check-label" for="newsletterCheck">
+                    <div className="form-check">
+                        <input className="form-check-input" type="checkbox" id="newsletterCheck" defaultChecked/>
+                        <label className="form-check-label" htmlFor="newsletterCheck">
                             Yes, I'd like to receive emails about exclusive sales and more.
                         </label>
                     </div>
 
-                    <button class="btn-review">REVIEW AND PAY</button>
+                    <button className="btn-review" onClick={handlePlaceOrder} disabled={loading}>
+                        {loading ? 'Processing...' : 'Place Order'}
+                    </button>
                 </div>
             </div>
 
-            <div class="col-lg-5">
-                <div class="order-summary">
-                    <h3 class="summary-title">Order Summary</h3>
+            <div className="col-lg-5">
+                <div className="order-summary">
+                    <h3 className="summary-title">Order Summary</h3>
                     
-                    <div class="summary-row">
-                        <span>1 ITEM</span>
-                        <span>$130.00</span>
+                    <div className="summary-row">
+                        <span>Subtotal:</span>
+                        <span>${parseFloat(total).toFixed(2)}</span>
                     </div>
-                    <div class="summary-row">
+                    <div className="summary-row">
                         <span>Delivery</span>
-                        <span>$6.99</span>
+                        <span>Free</span>
                     </div>
-                    <div class="summary-row">
+                    <div className="summary-row">
                         <span>Sales Tax</span>
-                        <span>-</span>
+                        <span>$0.00</span>
                     </div>
-                    <div class="summary-row total">
+
+                    <div className="summary-row total">
                         <span>Total</span>
-                        <span>$130.00</span>
+                        <strong className="text-primary">${parseFloat(total).toFixed(2)}</strong>
                     </div>
                 </div>
 
-                <div class="section-card mt-3">
+                <div className="section-card mt-3">
                     <h4 style={{fontWeight: "600", marginBottom: "1.5rem"}}>Order Details</h4>
-                    
-                    <div class="product-card">
-                        <div class="product-info">
-                            <div class="product-image">
-                                <img src="https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=150" alt="Dropset Trainer Shoes"/>
-                            </div>
-                            <div class="product-details">
-                                <h5>DROPSET TRAINER SHOES</h5>
-                                <p>Men's Road Running Shoes</p>
-                                <p>Enamel Blue/ University White</p>
-                                <p>Size 10 &nbsp;&nbsp;&nbsp; Quantity 1</p>
-                                <div class="product-price">$130.00</div>
+                    {cartItems.map(item => (
+                        <div key={item.id} className="product-card">
+                            <div className="product-info">
+                                <div className="product-image">
+                                    <img src={item.image_url} alt={item.name}/>
+                                </div>
+                                <div className="product-details">
+                                    <h5>{item.name}</h5>
+                                    <p>Size 10 &nbsp;&nbsp;&nbsp; Quantity {item.quantity}</p>
+                                    <div className="product-price">${(item.price * item.quantity).toFixed(2)}</div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    ))}
+                    
                 </div>
             </div>
         </div>

@@ -82,13 +82,13 @@
     width: 300px;
 }
 
-.btn-add {
-    background: var(--primary-color);
+.btn-add-user {
+    background-color: black;
     color: white;
     border: none;
-    padding: 8px 20px;
+    padding: 10px 24px;
     border-radius: 8px;
-    font-weight: 600;
+    font-weight: 500;
     cursor: pointer;
     display: flex;
     align-items: center;

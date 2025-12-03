@@ -27,13 +27,10 @@ const Navbar = () => {
             <div className="collapse navbar-collapse" id="navbarNav">
                 <ul className="navbar-nav mx-auto">
                     <li className="nav-item dropdown">
-                        <Link className="nav-link dropdown-toggle" to="/new">New Drops 🔥</Link>
+                        <Link className="nav-link dropdown-toggle" to="/products">New Drops 🔥</Link>
                     </li>
                     <li className="nav-item dropdown">
-                        <Link className="nav-link dropdown-toggle" to="/men">Men</Link>
-                    </li>
-                    <li className="nav-item dropdown">
-                        <Link className="nav-link dropdown-toggle" to="/women">Women</Link>
+                        <Link className="nav-link dropdown-toggle" to="/products">Categories</Link>
                     </li>
                     <li><Link className="nav-link" to="/about">About</Link></li>
                     <li><Link className="nav-link" to="/contact">Contact</Link></li>
@@ -41,21 +38,33 @@ const Navbar = () => {
 
                     {isAuthenticated && (
                         <>
-                            <li><Link className="nav-link active" to="/my-account">My Account</Link></li>
                             <li><Link className="nav-link active" to="/cart">Cart</Link></li>
+                            <li><Link className="nav-link active" to="/my-account">My Account</Link></li>
                         </>
                     )}
                     
                 </ul>
-                <div className="sub-navbar d-flex justify-content-between gap-3">
-                    <div className="col-md-7 col-12">
+                <div className="sub-navbar d-flex gap-3">
+                    {/* <div className="col-md-7 col-12">
                         <form className="d-flex">
                             <input className="form-control" type="search" placeholder="Search" aria-label="Search"/>
                             <button className="btn btn-outline-success" type="submit"><i className="fas fa-search"></i></button>
                         </form>
-                    </div>
+                    </div> */}
                     {isAuthenticated ? (
                         <>
+                            <div className="user-icon position-relative">
+                                <Link to="/cart">
+                                    <i className="fas fa-shopping-bag text-white"></i>
+                                    {cartCount > 0 && (
+                                    <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                        {cartCount}
+                                        <span className="visually-hidden">items in cart</span>
+                                    </span>
+                                    )}
+                                </Link>
+                            </div>
+                            
                             <div className='dropdown'>
                                 <a href="#" className='text-dark dropdown-toggle' data-bs-toggle='dropdown' aria-expanded='false'>
                                     <i className="fas fa-user"></i>
@@ -82,24 +91,14 @@ const Navbar = () => {
                                     )}
                                     <li><hr className="dropdown-divider"/></li>
                                     <li>    
-                                        <button className="dropdown-item" onClick={handleLogout}>
+                                        <button className="dropdown-item" onClick={() => handleLogout()}>
                                             <i className="fas fa-sign-out-alt me-2"></i>Logout
                                         </button>
                                     </li>
                                 </ul>
                             </div>
                             {/* <Link to="/my-account" className="text-dark"><i className="fas fa-user"></i></Link> */}
-                            <div className="user-icon position-relative">
-                                <Link to="/cart">
-                                    <i className="fas fa-shopping-bag text-white"></i>
-                                    {cartCount > 0 && (
-                                    <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                        {cartCount}
-                                        <span className="visually-hidden">items in cart</span>
-                                    </span>
-                                    )}
-                                </Link>
-                            </div>
+                            
                         </>
                     ) : (
                         <>

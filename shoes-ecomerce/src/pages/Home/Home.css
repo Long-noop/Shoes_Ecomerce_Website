@@ -49,6 +49,12 @@
     font-weight: 600;
 }
 
+.product-footer .btn-white {
+    background-color: white;
+    color: #000;
+    border: 1px solid #ccc;
+}
+
 .thumbnail-images {
     position: absolute;
     right: 20px;
@@ -179,6 +185,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.category-card h6 {
+  color: #1a1a1a;
+  font-weight: 900;
+  margin-bottom: 0.5rem;
+  z-index: 1;
 }
 
 /* Reviews Section */

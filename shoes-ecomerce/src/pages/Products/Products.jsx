@@ -315,14 +315,14 @@ const Products = () => {
                     <div className="products-grid">
                         {products.map(product => (
                             <div key={product.id} className="product-card">
-                                <Link to={`/details/${product.id}`}>
+                                <Link to={`/products/details/${product.id}`}>
                                     <span className="badge new">New</span>
                                     <div className="product-image">
                                         <img src={product.image_url} alt={product.name}/>
                                     </div>
                                 </Link>
                                 <div className="product-info">
-                                <Link to={`/details/${product.id}`}>
+                                <Link to={`/products/details/${product.id}`}>
                                     <h3>{product.name}</h3>
                                     <p>{product.category_name}</p>
                                 </Link>

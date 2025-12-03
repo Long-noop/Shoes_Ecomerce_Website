@@ -7,7 +7,7 @@ export const blogService = {
   },
 
   getBlog: async (id) => {
-    return await api.get(`/api/blogs/${id}`);
+    return await api.get(`/api/blog/${id}`);
   },
 
   createBlog: async (blogData) => {
@@ -15,10 +15,10 @@ export const blogService = {
   },
 
   updateBlog: async (id, blogData) => {
-    return await api.put(`/api/admin/blogs/${id}`, blogData);
+    return await api.put(`/api/admin/blog/${id}`, blogData);
   },
 
   deleteBlog: async (id) => {
-    return await api.delete(`/api/admin/blogs/${id}`);
+    return await api.delete(`/api/admin/blog/${id}`);
   },
 };

@@ -1,7 +1,24 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {Link} from 'react-router-dom'
+import { categoryService } from '../../services/categoryService';
 import './Footer.css'
 const Footer = () => {
+    const [categories, setCategories] = useState([]);
+
+    useEffect(() => {
+        loadCategories();
+    }, []);
+
+    const loadCategories = async () => {
+        try {
+        const response = await categoryService.getCategories();
+        if (response.success) {
+            setCategories(response.data);
+        }
+        } catch (error) {
+        console.error("Error loading categories in footer:", error);
+        }
+    };
   return (
     <footer className='user-site'>
         <div className="container">
@@ -16,12 +33,17 @@ const Footer = () => {
                 <div className="col-md-3">
                     <h5 className="footer-title">Categories</h5>
                     <ul className="footer-links">
-                        <li><a href="#">Runners</a></li>
-                        <li><a href="#">Sneakers</a></li>
-                        <li><a href="#">Basketball</a></li>
-                        <li><a href="#">Outdoor</a></li>
-                        <li><a href="#">Golf</a></li>
-                        <li><a href="#">Hiking</a></li>
+                        {categories.length > 0 ? (
+                            categories.map(cat => (
+                            <li key={cat.id}>
+                                <Link to={`/products?category_id=${cat.id}`}>
+                                {cat.name}
+                                </Link>
+                            </li>
+                            ))
+                        ) : (
+                            <li>Loading...</li>
+                        )}
                     </ul>
                 </div>
                 <div className="col-md-3">

@@ -33,6 +33,8 @@ import { AuthProvider } from './contexts/AuthContext.jsx'
 import { CartProvider } from './contexts/CartContext.jsx'
 import { GuestRoute } from './components/GuestRoute.jsx'
 import { ProtectedRoute } from './components/ProtectedRoute.jsx'
+import BlogDetails from './pages/BlogDetails/BlogDetails.jsx'
+import OrderDetails from './pages/OrderDetails/OrderDetails.jsx'
 
 function App() {
   return (
@@ -44,18 +46,20 @@ function App() {
             <Route path='about' element={<About/>} />
             <Route path='contact' element={<Contact/>} />
             <Route path='blogs' element={<Blog/>} />
+            <Route path='blog/:id' element={<BlogDetails/>} />
             <Route path='products' element={<Products/>} />
             <Route path='cart' element={<ProtectedRoute><Cart/></ProtectedRoute>} />
             <Route path='checkout' element={<ProtectedRoute><Checkout/></ProtectedRoute>} />
             <Route path='login' element={<GuestRoute><Login/></GuestRoute>} />
             <Route path='register' element={<GuestRoute><Register/></GuestRoute> } />
-            <Route path='details/:id' element={<ProductDetails/>} />
+            <Route path='products/details/:id' element={<ProductDetails/>} />
 
             <Route path='my-account' element={<ProtectedRoute><MyAccount/></ProtectedRoute>}>
               <Route index element={<Dashboard />} />
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="profile" element={<Profile />} />
               <Route path="orders" element={<Orders />} />
+              <Route path="orders/details/:id" element={<OrderDetails />} />
               <Route path="wishlist" element={<Wishlist />} />
               <Route path="addresses" element={<Addresses />} />
               <Route path="security" element={<Security />} />
@@ -68,14 +72,13 @@ function App() {
             <Route path='products' element={<AllProduct />} />
             <Route path="products/add" element={<AdminProductDetails />} />
             <Route path="products/details/:id" element={<AdminProductDetails />} />
-            <Route path='order-list' element={<OrderList />} />
-            <Route path='order-list' element={<OrderList />} />
-            <Route path='order-details/:id' element={<AdminOrderDetails />} />
+            <Route path='orders' element={<OrderList />} />
+            <Route path='orders/details/:id' element={<AdminOrderDetails />} />
             <Route path='user-management' element={<User />} />
             <Route path='contact' element={<AdminContact />} />
             <Route path='news' element={<News />} />
-            <Route path='news-details' element={<AdminNewsDetails />} />
-            <Route path='news-details/:id' element={<AdminNewsDetails />} />
+            <Route path='news/add' element={<AdminNewsDetails />} />
+            <Route path='news/details/:id' element={<AdminNewsDetails />} />
           </Route>
         </Routes>
       </CartProvider>
