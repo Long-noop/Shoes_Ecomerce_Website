@@ -15,7 +15,7 @@ export const orderService = {
   },
 
   updateOrderStatus: async (id, status) => {
-    return await api.put(`/api/orders/${id}/status`, { status });
+    return await api.put(`/api/admin/orders/${id}/status`, { status });
   },
 
   getStatistics: async () => {

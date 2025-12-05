@@ -1,60 +1,96 @@
-import { useState } from 'react'
-import {Route, Routes} from "react-router-dom"
-import './App.css'
-import Home from './pages/Home/Home'
-import About from './pages/About/About'
-import Blog from './pages/Blogs/Blog'
-import Contact from './pages/Contact/Contact'
-import Products from './pages/Products/Products'
-import Cart from './pages/Cart/Cart'
-import Checkout from './pages/Checkout/Checkout'
-import Login from './pages/Login/Login'
-import Register from './pages/Register/Register'
-import MyAccount from './pages/MyAccount/MyAccount'
+import { useState } from "react";
+import { Route, Routes } from "react-router-dom";
+import "./App.css";
+import Home from "./pages/Home/Home";
+import About from "./pages/About/About";
+import Blog from "./pages/Blogs/Blog";
+import Contact from "./pages/Contact/Contact";
+import Products from "./pages/Products/Products";
+import Cart from "./pages/Cart/Cart";
+import Checkout from "./pages/Checkout/Checkout";
+import Login from "./pages/Login/Login";
+import Register from "./pages/Register/Register";
+import MyAccount from "./pages/MyAccount/MyAccount";
 import Dashboard from "./pages/MyAccount/Dashboard";
 import Profile from "./pages/MyAccount/Profile";
 import Orders from "./pages/MyAccount/Orders";
 import Wishlist from "./pages/MyAccount/Wishlist";
 import Addresses from "./pages/MyAccount/Addresses";
 import Security from "./pages/MyAccount/Security";
-import ProductDetails from './pages/ProductDetails/ProductDetails'
-import UserLayout from './layouts/UserLayout.jsx'
-import AdminLayout from './layouts/AdminLayout.jsx'
-import AdminDashboard from './pages/Admin/AdminDashboard/AdminDashboard.jsx'
-import AllProduct from './pages/Admin/AllProducts/AllProduct.jsx'
-import OrderList from './pages/Admin/OrderList/OrderList.jsx'
-import User from './pages/Admin/User/User.jsx'
-import News from './pages/Admin/News/News.jsx'
-import AdminContact from './pages/Admin/AdminContact/AdminContact.jsx'
-import AdminProductDetails from './pages/Admin/AdminProductDetails/AdminProductDetails.jsx'
-import AdminOrderDetails from './pages/Admin/AdminOrderDetails/AdminOrderDetails.jsx'
-import AdminNewsDetails from './pages/Admin/AdminNewsDetails/AdminNewsDetails.jsx'
-import { AuthProvider } from './contexts/AuthContext.jsx'
-import { CartProvider } from './contexts/CartContext.jsx'
-import { GuestRoute } from './components/GuestRoute.jsx'
-import { ProtectedRoute } from './components/ProtectedRoute.jsx'
-import BlogDetails from './pages/BlogDetails/BlogDetails.jsx'
-import OrderDetails from './pages/OrderDetails/OrderDetails.jsx'
+import ProductDetails from "./pages/ProductDetails/ProductDetails";
+import UserLayout from "./layouts/UserLayout.jsx";
+import AdminLayout from "./layouts/AdminLayout.jsx";
+import AdminDashboard from "./pages/Admin/AdminDashboard/AdminDashboard.jsx";
+import AllProduct from "./pages/Admin/AllProducts/AllProduct.jsx";
+import OrderList from "./pages/Admin/OrderList/OrderList.jsx";
+import User from "./pages/Admin/User/User.jsx";
+import News from "./pages/Admin/News/News.jsx";
+import AdminContact from "./pages/Admin/AdminContact/AdminContact.jsx";
+import AdminProductDetails from "./pages/Admin/AdminProductDetails/AdminProductDetails.jsx";
+import AdminOrderDetails from "./pages/Admin/AdminOrderDetails/AdminOrderDetails.jsx";
+import AdminNewsDetails from "./pages/Admin/AdminNewsDetails/AdminNewsDetails.jsx";
+import { AuthProvider } from "./contexts/AuthContext.jsx";
+import { CartProvider } from "./contexts/CartContext.jsx";
+import { GuestRoute } from "./components/GuestRoute.jsx";
+import { ProtectedRoute } from "./components/ProtectedRoute.jsx";
+import BlogDetails from "./pages/BlogDetails/BlogDetails.jsx";
+import OrderDetails from "./pages/OrderDetails/OrderDetails.jsx";
+import BlankPage from "./pages/Admin/BlankPage/BlankPage.jsx";
 
 function App() {
   return (
     <AuthProvider>
       <CartProvider>
         <Routes>
-          <Route element = {<UserLayout/>}>
-            <Route path='' element={<Home/>}/>
-            <Route path='about' element={<About/>} />
-            <Route path='contact' element={<Contact/>} />
-            <Route path='blogs' element={<Blog/>} />
-            <Route path='blog/:id' element={<BlogDetails/>} />
-            <Route path='products' element={<Products/>} />
-            <Route path='cart' element={<ProtectedRoute><Cart/></ProtectedRoute>} />
-            <Route path='checkout' element={<ProtectedRoute><Checkout/></ProtectedRoute>} />
-            <Route path='login' element={<GuestRoute><Login/></GuestRoute>} />
-            <Route path='register' element={<GuestRoute><Register/></GuestRoute> } />
-            <Route path='products/details/:id' element={<ProductDetails/>} />
+          <Route element={<UserLayout />}>
+            <Route path="" element={<Home />} />
+            <Route path="about" element={<About />} />
+            <Route path="contact" element={<Contact />} />
+            <Route path="blogs" element={<Blog />} />
+            <Route path="blog/:id" element={<BlogDetails />} />
+            <Route path="products" element={<Products />} />
+            <Route
+              path="cart"
+              element={
+                <ProtectedRoute>
+                  <Cart />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="checkout"
+              element={
+                <ProtectedRoute>
+                  <Checkout />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="login"
+              element={
+                <GuestRoute>
+                  <Login />
+                </GuestRoute>
+              }
+            />
+            <Route
+              path="register"
+              element={
+                <GuestRoute>
+                  <Register />
+                </GuestRoute>
+              }
+            />
+            <Route path="products/details/:id" element={<ProductDetails />} />
 
-            <Route path='my-account' element={<ProtectedRoute><MyAccount/></ProtectedRoute>}>
+            <Route
+              path="my-account"
+              element={
+                <ProtectedRoute>
+                  <MyAccount />
+                </ProtectedRoute>
+              }
+            >
               <Route index element={<Dashboard />} />
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="profile" element={<Profile />} />
@@ -66,24 +102,35 @@ function App() {
             </Route>
           </Route>
 
-          <Route path="/admin" element={<ProtectedRoute requireAdmin={true}><AdminLayout /></ProtectedRoute>}>
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute requireAdmin={true}>
+                <AdminLayout />
+              </ProtectedRoute>
+            }
+          >
             <Route index element={<AdminDashboard />} />
-            <Route path='dashboard' element={<AdminDashboard />} />
-            <Route path='products' element={<AllProduct />} />
+            <Route path="dashboard" element={<AdminDashboard />} />
+            <Route path="products" element={<AllProduct />} />
             <Route path="products/add" element={<AdminProductDetails />} />
-            <Route path="products/details/:id" element={<AdminProductDetails />} />
-            <Route path='orders' element={<OrderList />} />
-            <Route path='orders/details/:id' element={<AdminOrderDetails />} />
-            <Route path='user-management' element={<User />} />
-            <Route path='contact' element={<AdminContact />} />
-            <Route path='news' element={<News />} />
-            <Route path='news/add' element={<AdminNewsDetails />} />
-            <Route path='news/details/:id' element={<AdminNewsDetails />} />
+            <Route
+              path="products/details/:id"
+              element={<AdminProductDetails />}
+            />
+            <Route path="orders" element={<OrderList />} />
+            <Route path="orders/details/:id" element={<AdminOrderDetails />} />
+            <Route path="user-management" element={<User />} />
+            <Route path="contact" element={<AdminContact />} />
+            <Route path="news" element={<News />} />
+            <Route path="news/add" element={<AdminNewsDetails />} />
+            <Route path="news/details/:id" element={<AdminNewsDetails />} />
+            <Route path="blank" element={<BlankPage />} />
           </Route>
         </Routes>
       </CartProvider>
     </AuthProvider>
-  )
+  );
 }
 
-export default App
+export default App;
