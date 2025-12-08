@@ -1,104 +1,109 @@
 footer.user-site {
-    background-color: #1a1a1a;
-    color: #fff;
-    padding: 3rem 2rem 2rem;
+  background-color: #1a1a1a;
+  color: #fff;
+  padding: 3rem 2rem 2rem;
 }
 
 .footer-title {
-    color: #ffa500;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    font-size: 1.1rem;
+  color: #ffa500;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
 }
 
 .footer-text {
-    color: #ccc;
-    font-size: 0.9rem;
-    line-height: 1.6;
+  color: #ccc;
+  font-size: 0.9rem;
+  line-height: 1.6;
 }
 
 .footer-links {
-    list-style: none;
-    padding: 0;
+  list-style: none;
+  padding: 0;
 }
 
 .footer-links li {
-    margin-bottom: 0.75rem;
+  margin-bottom: 0.75rem;
 }
 
 .footer-links a {
-    color: #ccc;
-    text-decoration: none;
-    font-size: 0.95rem;
+  color: #ccc;
+  text-decoration: none;
+  font-size: 0.95rem;
 }
 
 .footer-links a:hover {
-    color: #ffa500;
+  color: #ffa500;
 }
 
 .social-icons a {
-    color: #fff;
-    margin-right: 1.5rem;
-    font-size: 1.3rem;
+  color: #fff;
+  margin-right: 1.5rem;
+  font-size: 1.3rem;
 }
 
 .social-icons i:hover {
-    color: #ffa500;
+  color: #ffa500;
 }
 
-i.fa-facebook{
-    color: #FFFFFF;
+i.fa-facebook {
+  color: #ffffff;
 }
 
 .footer-logo {
-    font-size: 6rem;
-    font-weight: 900;
-    letter-spacing: 8px;
-    text-align: center;
-    margin: 3rem 0 2rem;
-    line-height: 1;
+  font-size: 6rem;
+  font-weight: 900;
+  letter-spacing: 8px;
+  text-align: center;
+  margin: 3rem 0 2rem;
+  line-height: 1;
 }
 
 .copyright {
-    text-align: center;
-    color: #999;
-    font-size: 0.85rem;
-    padding-top: 2rem;
-    border-top: 1px solid #333;
+  text-align: center;
+  color: #999;
+  font-size: 0.85rem;
+  padding-top: 2rem;
+  border-top: 1px solid #333;
 }
 
 .copyright a {
-    color: #4169e1;
-    text-decoration: none;
+  color: #4169e1;
+  text-decoration: none;
 }
 
 /* Toggle Buttons */
 .page-toggle {
-    text-align: center;
-    margin-bottom: 2rem;
+  text-align: center;
+  margin-bottom: 2rem;
 }
 
 .page-toggle button {
-    background-color: #ddd;
-    border: none;
-    padding: 0.75rem 2rem;
-    margin: 0 0.5rem;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
+  background-color: #ddd;
+  border: none;
+  padding: 0.75rem 2rem;
+  margin: 0 0.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 .page-toggle button.active {
-    background-color: #000;
-    color: #fff;
+  background-color: #000;
+  color: #fff;
 }
 
 @media (max-width: 992px) {
-    .row-container {
-        flex-direction: column;
-    }
+  .row-container {
+    flex-direction: column;
+  }
 
-    .social-login {
-        grid-template-columns: 1fr;
-    }
+  .social-login {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-logo {
+    font-size: 4rem;
+    font-weight: 800;
+  }
 }

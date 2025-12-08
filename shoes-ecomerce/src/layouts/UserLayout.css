@@ -1,0 +1,69 @@
+@media (max-width: 768px) {
+  .hide-mobile {
+    display: none !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .show-mobile {
+    display: none !important;
+  }
+}
+
+/* Responsive text sizes */
+@media (max-width: 768px) {
+  .responsive-text-lg {
+    font-size: 1.2rem !important;
+  }
+
+  .responsive-text-md {
+    font-size: 1rem !important;
+  }
+
+  .responsive-text-sm {
+    font-size: 0.9rem !important;
+  }
+}
+
+/* Responsive spacing */
+@media (max-width: 768px) {
+  .responsive-p-sm {
+    padding: 1rem !important;
+  }
+
+  .responsive-m-sm {
+    margin: 1rem !important;
+  }
+}
+
+/* Responsive containers */
+@media (max-width: 1400px) {
+  .container-custom {
+    max-width: 1200px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .container-custom {
+    max-width: 960px;
+  }
+}
+
+@media (max-width: 992px) {
+  .container-custom {
+    max-width: 720px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container-custom {
+    max-width: 540px;
+  }
+}
+
+@media (max-width: 576px) {
+  .container-custom {
+    max-width: 100%;
+    padding: 0 1rem;
+  }
+}

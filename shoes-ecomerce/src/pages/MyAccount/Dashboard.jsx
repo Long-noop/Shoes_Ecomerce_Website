@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import { orderService } from "../../services/orderService";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
+  const navigate = useNavigate();
   const { user } = useAuth();
   const [recentOrders, setRecentOrders] = useState([]);
   const [stats, setStats] = useState({
@@ -135,7 +136,12 @@ const Dashboard = () => {
           </thead>
           <tbody>
             {recentOrders.map((order) => (
-              <tr key={order.id}>
+              <tr
+                key={order.id}
+                onClick={() =>
+                  navigate(`/my-account/orders/details/${order.id}`)
+                }
+              >
                 <td>#{order.id}</td>
                 <td>{new Date(order.created_at).toLocaleDateString()}</td>
                 <td>{formatCurrency(order.total_price)}</td>

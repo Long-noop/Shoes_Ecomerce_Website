@@ -31,6 +31,14 @@ const Login = () => {
     try {
       const response = await login(formData.email, formData.password);
 
+      if (response.banned) {
+        alert(
+          "Tài khoản của bạn đã bị khóa. Vui lòng liên hệ Admin để được hỗ trợ."
+        );
+        navigate("/contact", { replace: true });
+        return;
+      }
+
       if (response.success) {
         // Redirect to previous page or home
         const from = location.state?.from?.pathname || "/";

@@ -66,16 +66,29 @@ const Home = () => {
     <div>
       <section className="hero-section">
         <div className="container">
-          <h1 className="hero-title">
+          <h1
+            className="hero-title"
+            style={{ fontSize: "clamp(3.5rem, 5vw, 4rem)" }}
+          >
             DO IT <span className="blue">RIGHT</span>
           </h1>
           <div className="hero-card">
             <div className="row align-items-center">
               <div className="col-md-6">
                 <div className="hero-content">
-                  <h2>NIKE AIR MAX</h2>
-                  <p>Nike introducing the new air max for everyone's comfort</p>
-                  <Link to="/products" className="btn btn-dark btn-lg">
+                  <div>
+                    <h2 style={{ fontSize: "clamp(2rem, 5vw, 4rem)" }}>
+                      NIKE AIR MAX
+                    </h2>
+                    <p>
+                      Nike introducing the new air max for everyone's comfort
+                    </p>
+                  </div>
+                  <Link
+                    to="/products"
+                    className="btn btn-dark btn-lg"
+                    style={{ fontSize: "clamp(1rem, 5vw, 1.5rem)" }}
+                  >
                     <i className="fas fa-shopping-cart"></i> SHOP NOW
                   </Link>
                 </div>
@@ -101,12 +114,14 @@ const Home = () => {
       <section className="new-drops">
         <div className="container">
           <div className="section-header">
-            <h2 className="section-title">
+            <h2
+              className="section-title"
+              style={{ fontSize: "clamp(2rem, 5vw, 4rem)" }}
+            >
               DON'T MISS OUT
               <br />
               NEW DROPS
             </h2>
-            <button className="btn btn-dark btn-lg">SHOP NEW DROPS</button>
           </div>
           <div className="row">
             {loading ? (
@@ -129,10 +144,12 @@ const Home = () => {
                             className="btn btn-sm btn-white"
                             onClick={() => handleAddToCart(product.id)}
                           >
-                            Add to Cart
+                            <i className="fas fa-shopping-cart"></i>
+                            <span>Add to Cart</span>
                           </button>
                         ) : (
                           <span className="btn btn-sm btn-danger">
+                            <i className="fas fa-shopping-cart"></i>
                             Out of Stock
                           </span>
                         )}
@@ -222,7 +239,6 @@ const Home = () => {
         <div className="container">
           <div className="section-header">
             <h2 className="section-title">REVIEWS</h2>
-            <button className="btn btn-dark btn-lg">SEE ALL</button>
           </div>
           <div className="row">
             <div className="col-md-4">

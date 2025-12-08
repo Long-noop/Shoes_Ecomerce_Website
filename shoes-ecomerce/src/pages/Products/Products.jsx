@@ -1,10 +1,11 @@
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import "./Products.scss";
 import { useAuth } from "../../contexts/AuthContext";
 import { categoryService } from "../../services/categoryService";
 import { productService } from "../../services/productService";
 import { useCart } from "../../contexts/CartContext";
+
 const Products = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const { isAuthenticated } = useAuth();
@@ -13,6 +14,9 @@ const Products = () => {
   const [loading, setLoading] = useState(true);
   const [pagination, setPagination] = useState(null);
   const { addToCart } = useCart();
+
+  // State for sidebar drawer
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   const [filters, setFilters] = useState({
     keyword: searchParams.get("keyword") || "",
@@ -30,6 +34,34 @@ const Products = () => {
   useEffect(() => {
     loadProducts();
   }, [filters]);
+
+  // Close filter when clicking outside on mobile
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (
+        isFilterOpen &&
+        !e.target.closest(".filters-sidebar") &&
+        !e.target.closest(".filter-toggle-btn")
+      ) {
+        setIsFilterOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isFilterOpen]);
+
+  // Prevent body scroll when filter is open
+  useEffect(() => {
+    if (isFilterOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isFilterOpen]);
 
   const loadCategories = async () => {
     try {
@@ -61,11 +93,11 @@ const Products = () => {
       setLoading(false);
     }
   };
+
   const handleFilterChange = (key, value) => {
     const newFilters = { ...filters, [key]: value, page: 1 };
     setFilters(newFilters);
 
-    // Update URL params
     const params = new URLSearchParams();
     Object.keys(newFilters).forEach((k) => {
       if (newFilters[k]) params.set(k, newFilters[k]);
@@ -92,12 +124,22 @@ const Products = () => {
       alert(error.message || "Failed to add to cart");
     }
   };
+
   const formatCurrency = (amount) => {
     return new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "VND",
     }).format(amount || 0);
   };
+
+  const toggleFilter = () => {
+    setIsFilterOpen(!isFilterOpen);
+  };
+
+  const closeFilter = () => {
+    setIsFilterOpen(false);
+  };
+
   return (
     <div className="user-products">
       <div className="hero-banner">
@@ -121,9 +163,9 @@ const Products = () => {
         <div className="page-header">
           <div>
             <h1 className="page-title">Life Style Shoes</h1>
-            <p className="item-count">122 Items</p>
+            <p className="item-count">{pagination?.total || 0} Items</p>
           </div>
-          <div className="mb-3 col-9">
+          <div className="mb-3 col-lg-9 col-12">
             <label className="form-label">Search</label>
             <input
               type="text"
@@ -134,8 +176,9 @@ const Products = () => {
             />
           </div>
         </div>
+
         {pagination && (
-          <div className=" text-end">
+          <div className="text-end">
             <p className="text-muted">
               Showing {pagination.from}-{pagination.to} of {pagination.total}{" "}
               results
@@ -143,8 +186,33 @@ const Products = () => {
           </div>
         )}
 
+        {/* Filter Overlay for Mobile */}
+        <div
+          className={`filter-overlay ${isFilterOpen ? "active" : ""}`}
+          onClick={closeFilter}
+        ></div>
+
+        {/* Filter Toggle Button for Mobile */}
+        <button
+          className={`filter-toggle-btn ${isFilterOpen ? "active" : ""}`}
+          onClick={toggleFilter}
+          aria-label="Toggle Filters"
+        >
+          <i className={`fas ${isFilterOpen ? "fa-times" : "fa-filter"}`}></i>
+        </button>
+
         <div className="content-grid">
-          <aside className="filters-sidebar">
+          {/* Filters Sidebar with Drawer functionality */}
+          <aside className={`filters-sidebar ${isFilterOpen ? "open" : ""}`}>
+            {/* Close button for mobile */}
+            <button
+              className="filter-close-btn"
+              onClick={closeFilter}
+              aria-label="Close Filters"
+            >
+              <i className="fas fa-times"></i>
+            </button>
+
             <h3 className="filter-title">Filters</h3>
 
             <div className="filter-section">
@@ -244,41 +312,6 @@ const Products = () => {
 
             <div className="filter-section">
               <div className="filter-header">
-                <span className="filter-label">Size</span>
-                <i className="fas fa-chevron-up"></i>
-              </div>
-              <div className="filter-checkbox">
-                <input type="checkbox" id="casual" />
-                <label htmlFor="casual">Casual shoes</label>
-              </div>
-              <div className="filter-checkbox">
-                <input type="checkbox" id="runners" />
-                <label htmlFor="runners">Runners</label>
-              </div>
-              <div className="filter-checkbox">
-                <input type="checkbox" id="hiking" />
-                <label htmlFor="hiking">Hiking</label>
-              </div>
-              <div className="filter-checkbox">
-                <input type="checkbox" id="sneaker" />
-                <label htmlFor="sneaker">Sneaker</label>
-              </div>
-              <div className="filter-checkbox">
-                <input type="checkbox" id="basketball" />
-                <label htmlFor="basketball">Basketball</label>
-              </div>
-              <div className="filter-checkbox">
-                <input type="checkbox" id="golf" />
-                <label htmlFor="golf">Golf</label>
-              </div>
-              <div className="filter-checkbox">
-                <input type="checkbox" id="outdoor" />
-                <label htmlFor="outdoor">Outdoor</label>
-              </div>
-            </div>
-
-            <div className="filter-section">
-              <div className="filter-header">
                 <span className="filter-label">Category</span>
                 <i className="fas fa-chevron-up"></i>
               </div>
@@ -301,28 +334,11 @@ const Products = () => {
                       handleFilterChange("category_id", String(cat.id))
                     }
                   />
-
                   <label htmlFor={`cat-${cat.id}`}>
-                    {" "}
                     {cat.name} ({cat.product_count || 0})
                   </label>
                 </div>
               ))}
-            </div>
-
-            <div className="filter-section">
-              <div className="filter-header">
-                <span className="filter-label">Gender</span>
-                <i className="fas fa-chevron-up"></i>
-              </div>
-              <div className="filter-checkbox">
-                <input type="checkbox" id="men" />
-                <label htmlFor="men">Men</label>
-              </div>
-              <div className="filter-checkbox">
-                <input type="checkbox" id="women" />
-                <label htmlFor="women">Women</label>
-              </div>
             </div>
 
             <div className="filter-section">
@@ -351,8 +367,9 @@ const Products = () => {
                 </div>
               </div>
             </div>
+
             <button
-              className="btn btn-secondary w-100"
+              className="btn btn-secondary w-100 mb-3"
               onClick={() => {
                 setFilters({
                   keyword: "",
@@ -367,53 +384,63 @@ const Products = () => {
             >
               Clear Filters
             </button>
+
+            <button className="btn btn-dark w-100" onClick={closeFilter}>
+              Apply Filters
+            </button>
           </aside>
 
-          {products.length === 0 ? (
+          {/* Products Grid */}
+          {loading ? (
+            <div className="text-center py-5">
+              <div className="spinner-border" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          ) : products.length === 0 ? (
             <div className="alert alert-info">
               No products found. Try adjusting your filters.
             </div>
           ) : (
-            <>
-              <div className="products-grid">
-                {products.map((product) => (
-                  <div key={product.id} className="product-card">
+            <div className="products-grid">
+              {products.map((product) => (
+                <div key={product.id} className="product-card">
+                  <Link to={`/products/details/${product.id}`}>
+                    <span className="badge new">New</span>
+                    <div className="product-image">
+                      <img src={product.image_url} alt={product.name} />
+                    </div>
+                  </Link>
+                  <div className="product-info">
                     <Link to={`/products/details/${product.id}`}>
-                      <span className="badge new">New</span>
-                      <div className="product-image">
-                        <img src={product.image_url} alt={product.name} />
-                      </div>
+                      <h3>{product.name}</h3>
+                      <p>{product.category_name}</p>
                     </Link>
-                    <div className="product-info">
-                      <Link to={`/products/details/${product.id}`}>
-                        <h3>{product.name}</h3>
-                        <p>{product.category_name}</p>
-                      </Link>
-                      <div className="product-footer">
-                        {product.stock > 0 ? (
-                          <button
-                            className="btn btn-sm btn-white"
-                            onClick={() => handleAddToCart(product.id)}
-                          >
-                            Add to Cart
-                          </button>
-                        ) : (
-                          <span className="btn btn-sm btn-danger">
-                            Out of Stock
-                          </span>
-                        )}
-                        <span className="price">
-                          {formatCurrency(product.price)}
+                    <div className="product-footer">
+                      {product.stock > 0 ? (
+                        <button
+                          className="btn btn-sm btn-white"
+                          onClick={() => handleAddToCart(product.id)}
+                        >
+                          Add to Cart
+                        </button>
+                      ) : (
+                        <span className="btn btn-sm btn-danger">
+                          Out of Stock
                         </span>
-                      </div>
+                      )}
+                      <span className="price">
+                        {formatCurrency(product.price)}
+                      </span>
                     </div>
                   </div>
-                ))}
-              </div>
-            </>
+                </div>
+              ))}
+            </div>
           )}
         </div>
 
+        {/* Pagination */}
         {pagination && pagination.last_page > 1 && (
           <nav className="mt-4">
             <ul className="pagination justify-content-center gap-3">
@@ -425,8 +452,7 @@ const Products = () => {
                   onClick={() => handlePageChange(pagination.current_page - 1)}
                   disabled={pagination.current_page === 1}
                 >
-                  <i className="fas fa-chevron-left"></i>
-                  Previous
+                  <i className="fas fa-chevron-left"></i> Previous
                 </button>
               </li>
 
@@ -455,8 +481,7 @@ const Products = () => {
                   onClick={() => handlePageChange(pagination.current_page + 1)}
                   disabled={pagination.current_page === pagination.last_page}
                 >
-                  Next
-                  <i className="fas fa-chevron-right"></i>
+                  Next <i className="fas fa-chevron-right"></i>
                 </button>
               </li>
             </ul>

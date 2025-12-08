@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { orderService } from "../../services/orderService";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import OrderDetails from "../OrderDetails/OrderDetails";
 
 const Orders = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -95,7 +96,12 @@ const Orders = () => {
             </thead>
             <tbody>
               {orders.map((order) => (
-                <tr key={order.id}>
+                <tr
+                  key={order.id}
+                  onClick={() =>
+                    navigate(`/my-account/orders/details/${order.id}`)
+                  }
+                >
                   <td>
                     <strong>#{order.id}</strong>
                   </td>
